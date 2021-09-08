@@ -10,8 +10,8 @@ const StartRoom = () => {
         <Icon
           style={tw`pr-6`}
           size={24}
-          name="bars"
-          type="font-awesome"
+          name="keypad"
+          type="ionicon"
           color="#000"
           // onPress={() => navigation.navigate("SearchScreen")}
         />

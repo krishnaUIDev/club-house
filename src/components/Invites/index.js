@@ -1,15 +1,40 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import { Icon } from "react-native-elements";
+import { Icon, Input } from "react-native-elements";
 
 const Invites = () => {
   return (
     <View style={[tw`h-full p-2 pt-4`, { backgroundColor: "#f2f0e4" }]}>
-      <Text style={tw`text-center text-sm text-gray-700`}>
+      <Text style={tw`text-center text-base text-gray-700`}>
         Who's great addition to Clubhouse? {"\n"} You'll get credit for the
         invite on their profile!
       </Text>
+      <View style={tw`flex-row justify-between items-center px-2 py-8 `}>
+        <Input
+          placeholder="Invite a phone #"
+          inputStyle={{ fontSize: 16 }}
+          containerStyle={{ width: 310 }}
+          inputContainerStyle={{
+            borderRadius: 10,
+            backgroundColor: "#e3e0d7",
+            height: 40,
+            paddingLeft: 6,
+            paddingRigt: 6,
+            borderBottomWidth: 0,
+          }}
+          leftIcon={
+            <Icon
+              name="search-outline"
+              type="ionicon"
+              size={18}
+              color="black"
+            />
+          }
+        />
+        <Icon name="address-book-o" type="font-awesome" color="black" />
+      </View>
+
       <View style={tw`bg-white rounded-xl p-4 mx-8 my-2 shadow items-center`}>
         <View style={tw`flex-row relative`}>
           <View style={tw`absolute top-2 pr-4 right-10`}>
@@ -27,7 +52,7 @@ const Invites = () => {
           </View>
         </View>
         <Text style={tw`font-semibold text-lg`}>Let's find your friends!</Text>
-        <Text style={tw`font-normal py-2 text-center`}>
+        <Text style={tw`font-normal py-3 pb-6 text-center`}>
           We'll show you who's already here {"\n"} and notify you when new
           friends join
         </Text>
