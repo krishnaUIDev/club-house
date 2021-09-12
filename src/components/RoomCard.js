@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { Icon, Avatar } from "react-native-elements";
 
@@ -33,15 +33,24 @@ const RoomCard = () => {
         Ekkada unna pakkanenvu unnatuu untunnadi
       </Text>
       <View style={tw`w-full flex-row pt-2`}>
-        <View style={tw`w-3/12`}>
-          <Avatar
-            rounded
+        <View style={tw`w-4/12 flex-row relative`}>
+          <Image
             source={{
-              uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+              uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
             }}
+            style={[tw`rounded-xl`, { height: 50, width: 50 }]}
+          />
+          <Image
+            source={{
+              uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+            }}
+            style={[
+              tw`rounded-xl absolute top-6 left-5`,
+              { height: 50, width: 50 },
+            ]}
           />
         </View>
-        <View style={tw`w-9/12`}>
+        <View style={tw`w-8/12`}>
           <View>
             <View style={tw`flex flex-row items-center`}>
               <Text style={tw`text-base tracking-wide`}>Krishna</Text>

@@ -9,6 +9,7 @@ import Search from "./src/components/Search";
 import Invites from "./src/components/Invites";
 import Welcome from "./src/components/Welcome";
 import SignIn from "./src/components/Welcome/SignIn";
+import JoinedRoom from "./src/components/JoinedRoom";
 
 const Stack = createStackNavigator();
 
@@ -118,6 +119,11 @@ const HomeStack = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="JoinedRoom"
+        component={JoinedRoom}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="InvitesScreen"
         component={Invites}
         options={{
@@ -147,7 +153,7 @@ const HomeStack = () => {
 
 const StackRoutes = () => {
   return (
-    <Stack.Navigator initialRouteName="StartStack">
+    <Stack.Navigator initialRouteName="HomeStack">
       <Stack.Screen
         name="HomeStack"
         component={HomeStack}
