@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4.0.0-alpha.25",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.7",
     "@reduxjs/toolkit": "^1.6.1",
@@ -23,14 +24,14 @@
     "react-native-dotenv": "^3.2.0",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-modalize": "^2.0.8",
+    "react-native-reanimated": "2.2.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "react-phone-number-input": "^3.1.26",
     "react-redux": "^7.2.5",
-    "tailwind-react-native-classnames": "^1.4.3",
-    "@gorhom/bottom-sheet": "^4.0.0-alpha.25",
-    "react-native-reanimated": "2.2.0"
+    "tailwind-react-native-classnames": "^1.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

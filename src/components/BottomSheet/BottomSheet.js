@@ -1,40 +1,24 @@
-import React, { useCallback, useMemo, useRef } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import BottomSheet from "@gorhom/bottom-sheet";
+import React from "react";
+import { Modalize } from "react-native-modalize";
 
-const Sheet = () => {
-  const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
-  // const snapPoints = useMemo(() => ["75%", "100%"], []);
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+const Modal = ({ close, children, refModal }) => {
   return (
-    <View style={styles.container}>
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-      >
-        <View style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
-        </View>
-      </BottomSheet>
-    </View>
+    <Modalize
+      onBackButtonPress={close}
+      ref={refModal}
+      modalHeight={400}
+      handlePosition="inside"
+      handleStyle={{
+        opacity: 1,
+      }}
+      overlayStyle={{
+        backgroundColor: "rgba(0,0,0,0.4)",
+      }}
+      dialogStyle={{ position: "absolute", bottom: 0 }}
+    >
+      {children}
+    </Modalize>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: "grey",
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-});
-
-export default Sheet;
+export default Modal;

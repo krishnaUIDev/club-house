@@ -23,7 +23,7 @@ const Member = ({ name, image, admin }) => {
             color="#37b168"
           />
         )}
-        <Text style={tw`text-base font-semibold`}>{name}</Text>
+        <Text style={tw`text-sm font-semibold`}>{name}</Text>
       </View>
     </View>
   );

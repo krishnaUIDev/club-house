@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import tw from "tailwind-react-native-classnames";
 import { View, TouchableOpacity, Text } from "react-native";
@@ -10,6 +10,7 @@ import Invites from "./src/components/Invites";
 import Welcome from "./src/components/Welcome";
 import SignIn from "./src/components/Welcome/SignIn";
 import JoinedRoom from "./src/components/JoinedRoom";
+import Profile from "./src/components/Profile";
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,11 @@ const StartRoutes = () => {
 };
 
 const HomeStack = () => {
+  const modalizeRef = useRef(null);
+  const onOpen = () => {
+    modalizeRef.current?.open();
+  };
+
   const navigation = useNavigation();
   return (
     <Stack.Navigator
@@ -108,6 +114,7 @@ const HomeStack = () => {
                 name="person-circle-outline"
                 type="ionicon"
                 color="#000"
+                onPress={() => navigation.navigate("ProfileScreen")}
               />
             </View>
           ),
@@ -116,6 +123,11 @@ const HomeStack = () => {
       <Stack.Screen
         name="SearchScreen"
         component={Search}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProfileScreen"
+        component={Profile}
         options={{ headerShown: false }}
       />
       <Stack.Screen
