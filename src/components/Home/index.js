@@ -1,14 +1,16 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, SafeAreaView, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import RoomCard from "../RoomCard";
 import StartRoom from "./StartRoom";
 
 const Index = () => {
+  const navigation = useNavigation();
   return (
     <View style={[tw`relative flex-1`, { backgroundColor: "#f2f0e4" }]}>
       <View style={tw`p-6`}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("JoinedRoom")}>
           <RoomCard />
         </TouchableOpacity>
       </View>

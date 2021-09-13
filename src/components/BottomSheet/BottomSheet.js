@@ -1,12 +1,12 @@
 import React from "react";
 import { Modalize } from "react-native-modalize";
 
-const Modal = ({ close, children, refModal }) => {
+const Modal = ({ close, children, refModal, modalHeight }) => {
   return (
     <Modalize
       onBackButtonPress={close}
       ref={refModal}
-      modalHeight={400}
+      modalHeight={modalHeight}
       handlePosition="inside"
       handleStyle={{
         opacity: 1,

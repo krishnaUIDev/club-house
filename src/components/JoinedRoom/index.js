@@ -141,22 +141,6 @@ const data = [
 ];
 
 const index = () => {
-  const numColumns = 3;
-
-  const formatData = (data, numColumns) => {
-    const numberOfFullRows = Math.floor(data.length / numColumns);
-
-    let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
-    while (
-      numberOfElementsLastRow !== numColumns &&
-      numberOfElementsLastRow !== 0
-    ) {
-      data.push({ id: `blank-${numberOfElementsLastRow}`, empty: true });
-      numberOfElementsLastRow++;
-    }
-
-    return data;
-  };
   return (
     <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
       <View
@@ -225,9 +209,10 @@ const index = () => {
           </Text>
           <View style={tw`mt-4 mb-4 ml-8 flex-row h-4/6`}>
             <FlatList
-              data={formatData(data, numColumns)}
+              data={data}
               keyExtractor={(item) => item.id}
-              numColumns={numColumns}
+              horizontal={false}
+              numColumns={3}
               renderItem={({ item: { name, image, admin } }) => (
                 <View style={tw``}>
                   <Member name={name} image={image} admin={admin} />

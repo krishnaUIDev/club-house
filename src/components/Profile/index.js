@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react";
+import React, { useRef } from "react";
 import {
   Text,
   View,
@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
-import { Modalize } from "react-native-modalize";
 import { useNavigation } from "@react-navigation/native";
 import Settings from "../Settings";
 import Modal from "../BottomSheet/BottomSheet";
