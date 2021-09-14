@@ -11,6 +11,7 @@ import Welcome from "./src/components/Welcome";
 import SignIn from "./src/components/Welcome/SignIn";
 import JoinedRoom from "./src/components/JoinedRoom";
 import Profile from "./src/components/Profile";
+import Messages from "./src/components/Messages";
 
 const Stack = createStackNavigator();
 
@@ -124,6 +125,50 @@ const HomeStack = () => {
         name="SearchScreen"
         component={Search}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MessageScreen"
+        component={Messages}
+        options={{
+          title: "BACKCHANNEL",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <Icon
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("HomeScreen")}
+              />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <View style={tw`flex flex-row items-center content-center`}>
+              <TouchableOpacity>
+                <Icon
+                  style={tw`pr-6`}
+                  size={20}
+                  name="ellipsis-h"
+                  type="font-awesome"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Icon
+                  style={tw`pr-6`}
+                  size={24}
+                  name="pencil-square-o"
+                  type="font-awesome"
+                />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
       />
       <Stack.Screen
         name="ProfileScreen"

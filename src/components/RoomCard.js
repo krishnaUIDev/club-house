@@ -38,16 +38,16 @@ const RoomCard = () => {
             source={{
               uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
             }}
-            style={[tw`rounded-xl`, { height: 50, width: 50 }]}
+            style={[
+              tw`rounded-xl absolute top-5 left-7`,
+              { height: 50, width: 50 },
+            ]}
           />
           <Image
             source={{
               uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
             }}
-            style={[
-              tw`rounded-xl absolute top-6 left-5`,
-              { height: 50, width: 50 },
-            ]}
+            style={[tw`rounded-xl `, { height: 50, width: 50 }]}
           />
         </View>
         <View style={tw`w-8/12`}>

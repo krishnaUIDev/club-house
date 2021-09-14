@@ -8,6 +8,7 @@ import CreateRoom from "./CreateRoom";
 const StartRoom = () => {
   const roomRef = useRef(null);
   const onOpen = () => roomRef.current?.open();
+  const navigation = useNavigation();
   return (
     <View>
       <View style={tw`flex flex-row justify-between items-center px-8 mb-4`}>
@@ -39,7 +40,7 @@ const StartRoom = () => {
             name="paper-plane-o"
             type="font-awesome"
             color="#000"
-            // onPress={() => navigation.navigate("SearchScreen")}
+            onPress={() => navigation.navigate("MessageScreen")}
           />
         </TouchableOpacity>
       </View>

@@ -14,7 +14,6 @@ const Index = () => {
           <RoomCard />
         </TouchableOpacity>
       </View>
-
       <View style={tw`absolute inset-x-0 bottom-4 h-16`}>
         <StartRoom />
       </View>

@@ -207,7 +207,7 @@ const index = () => {
           <Text style={tw`text-lg font-semibold py-1 px-8`}>
             Codenames Game Mode On
           </Text>
-          <View style={tw`mt-4 mb-4 ml-8 flex-row h-4/6`}>
+          <View style={tw`mt-4 mb-4 ml-8 flex-row h-4/6 relative`}>
             <FlatList
               data={data}
               keyExtractor={(item) => item.id}
@@ -219,10 +219,24 @@ const index = () => {
                 </View>
               )}
             />
+            <View style={tw`absolute inset-x-0 bottom-16 right-0`}>
+              <View
+                // onPress={() => navigation.navigate("HomeScreen")}
+                style={tw`bg-white z-50 p-3 rounded-l-full shadow-lg absolute flex self-end w-14 `}
+              >
+                <Icon
+                  size={24}
+                  name="paper-plane-o"
+                  type="font-awesome"
+                  color="#000"
+                  style={tw``}
+                />
+              </View>
+            </View>
           </View>
           <View style={tw`absolute inset-x-0 bottom-28`}>
             <View
-              style={tw`flex flex-row justify-between items-center px-8 flex-wrap `}
+              style={tw`flex flex-row justify-between items-center px-4 flex-wrap `}
             >
               <View style={tw`flex flex-row items-center`}>
                 <TouchableOpacity

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.0.0-alpha.25",
+    "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.7",
     "@reduxjs/toolkit": "^1.6.1",
@@ -18,6 +19,7 @@
     "expo-permissions": "^12.1.1",
     "expo-status-bar": "~1.0.4",
     "firebase": "8.2.3",
+    "lottie-react-native": "4.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
