@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { Icon, Input } from "react-native-elements";
+import InputComponent from "../Reuse/InputComponent";
 
 const Invites = () => {
   return (
@@ -11,27 +12,7 @@ const Invites = () => {
         invite on their profile!
       </Text>
       <View style={tw`flex-row justify-between items-center px-2 py-8 `}>
-        <Input
-          placeholder="Invite a phone #"
-          inputStyle={{ fontSize: 16 }}
-          containerStyle={{ width: 310 }}
-          inputContainerStyle={{
-            borderRadius: 10,
-            backgroundColor: "#e3e0d7",
-            height: 40,
-            paddingLeft: 6,
-            paddingRigt: 6,
-            borderBottomWidth: 0,
-          }}
-          leftIcon={
-            <Icon
-              name="search-outline"
-              type="ionicon"
-              size={18}
-              color="black"
-            />
-          }
-        />
+        <InputComponent placeholder="Invite a phone #" />
         <Icon name="address-book-o" type="font-awesome" color="black" />
       </View>
 
