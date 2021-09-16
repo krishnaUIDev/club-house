@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   SafeAreaView,
@@ -11,7 +11,7 @@ import tw from "tailwind-react-native-classnames";
 import { Icon } from "react-native-elements";
 import Member from "../Member";
 
-const data = [
+const apiData = [
   {
     id: 0,
     name: "rakesh",
@@ -141,6 +141,15 @@ const data = [
 ];
 
 const index = () => {
+  const [refreshing, setrefreshing] = useState(false);
+  const [data, setdata] = useState(apiData);
+  const onRefresh = () => {
+    setrefreshing(true);
+    setTimeout(() => {
+      setdata((data) => [...data]);
+      setrefreshing(false);
+    }, 2000);
+  };
   return (
     <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
       <View
@@ -213,6 +222,8 @@ const index = () => {
               keyExtractor={(item) => item.id}
               horizontal={false}
               numColumns={3}
+              refreshing={refreshing}
+              onRefresh={onRefresh}
               renderItem={({ item: { name, image, admin } }) => (
                 <View style={tw``}>
                   <Member name={name} image={image} admin={admin} />

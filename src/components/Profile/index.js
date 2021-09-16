@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
@@ -19,6 +20,28 @@ const index = () => {
   const onOpen = () => {
     modalizeRef.current?.open();
   };
+
+  const createAlert = () =>
+    Alert.alert(
+      "Clubhouse is for real names",
+      "You can fix your legal name or add an optional creator alias if you are a puglic figure. This can only be changed once in a while",
+      [
+        {
+          text: "Correct my legal name...",
+          onPress: () => console.log("Ask me later pressed"),
+        },
+        {
+          text: "Add my creator alias...",
+          onPress: () => console.log("Cancel Pressed"),
+        },
+        {
+          text: "Never mind",
+          onPress: () => console.log("OK Pressed"),
+          style: "cancel",
+        },
+      ],
+      { cancelable: false }
+    );
 
   return (
     <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
@@ -50,7 +73,7 @@ const index = () => {
         </View>
       </View>
       <View style={[tw`flex h-full px-6 py-4`]}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onOpen}>
           <Image
             source={{
               uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -58,16 +81,18 @@ const index = () => {
             style={[tw`rounded-3xl h-24 w-24`]}
           />
         </TouchableOpacity>
-        <Text style={tw`text-lg font-bold pt-2`}>Krishna</Text>
-        <TouchableOpacity onPress={onOpen}>
+        <TouchableOpacity onPress={createAlert}>
+          <Text style={tw`text-lg font-bold pt-2`}>Krishna</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("user")}>
           <Text style={tw`text-base font-normal pb-6`}>@Krishna</Text>
         </TouchableOpacity>
         <View style={tw`flex-row pb-6`}>
-          <TouchableOpacity>
-            <Text style={tw`pr-6 text-base font-semibold`}>23 Followers</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("followers")}>
+            <Text style={tw`pr-6 text-base font-semibold`}>23 followers</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={tw`pr-6 text-base font-semibold`}>23 Followers</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("following")}>
+            <Text style={tw`pr-6 text-base font-semibold`}>23 following</Text>
           </TouchableOpacity>
         </View>
         <View style={tw`pb-6`}>

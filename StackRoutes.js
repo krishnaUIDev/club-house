@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import tw from "tailwind-react-native-classnames";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import Home from "./src/components/Home";
@@ -12,6 +12,9 @@ import SignIn from "./src/components/Welcome/SignIn";
 import JoinedRoom from "./src/components/JoinedRoom";
 import Profile from "./src/components/Profile";
 import Messages from "./src/components/Messages";
+import UpdateUser from "./src/components/Profile/UpdateUser";
+import Followers from "./src/components/Profile/Followers";
+import Following from "./src/components/Profile/Following";
 
 const Stack = createStackNavigator();
 
@@ -53,11 +56,6 @@ const StartRoutes = () => {
 };
 
 const HomeStack = () => {
-  const modalizeRef = useRef(null);
-  const onOpen = () => {
-    modalizeRef.current?.open();
-  };
-
   const navigation = useNavigation();
   return (
     <Stack.Navigator
@@ -124,7 +122,36 @@ const HomeStack = () => {
       <Stack.Screen
         name="SearchScreen"
         component={Search}
-        options={{ headerShown: false }}
+        options={{
+          title: "EXPLORE",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <Icon
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("HomeScreen")}
+              />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity>
+              <Icon
+                style={tw`pr-6`}
+                size={20}
+                name="user-plus"
+                type="font-awesome-5"
+              />
+            </TouchableOpacity>
+          ),
+        }}
       />
       <Stack.Screen
         name="MessageScreen"
@@ -179,6 +206,78 @@ const HomeStack = () => {
         name="JoinedRoom"
         component={JoinedRoom}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="user"
+        component={UpdateUser}
+        options={{
+          title: "",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <Icon
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("ProfileScreen")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="followers"
+        component={Followers}
+        options={{
+          title: "Followers",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <Icon
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("ProfileScreen")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="following"
+        component={Following}
+        options={{
+          title: "Following",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <Icon
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("ProfileScreen")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
       />
       <Stack.Screen
         name="InvitesScreen"

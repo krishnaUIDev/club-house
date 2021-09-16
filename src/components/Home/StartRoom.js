@@ -4,6 +4,7 @@ import tw from "tailwind-react-native-classnames";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import CreateRoom from "./CreateRoom";
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 const StartRoom = () => {
   const roomRef = useRef(null);
@@ -19,7 +20,15 @@ const StartRoom = () => {
             name="keypad"
             type="ionicon"
             color="#000"
-            // onPress={() => navigation.navigate("SearchScreen")}
+            onPress={() => navigation.openDrawer()}
+            // onPress={() => {
+            //   /* HERE WE GONE SHOW OUR FIRST MESSAGE */
+            //   showMessage({
+            //     message: "Simple message",
+            //     type: "success",
+            //     // backgroundColor: "#27ae61",
+            //   });
+            // }}
           />
         </TouchableOpacity>
 

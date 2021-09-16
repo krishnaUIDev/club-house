@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./src/store";
 import tw from "tailwind-react-native-classnames";
 import StackRoutes from "./StackRoutes";
+import FlashMessage from "react-native-flash-message";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           </KeyboardAvoidingView>
         </SafeAreaProvider>
       </NavigationContainer>
+      <FlashMessage />
     </Provider>
   );
 }
