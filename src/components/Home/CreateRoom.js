@@ -1,7 +1,15 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  TextInput,
+} from "react-native";
 import { Modalize } from "react-native-modalize";
 import tw from "tailwind-react-native-classnames";
+import Dialog from "react-native-dialog";
 
 const data = [
   {
@@ -30,10 +38,28 @@ const data = [
   },
 ];
 
+const AlertBox = ({ visible, setVisible }) => {
+  return (
+    <View>
+      <Dialog.Container visible={visible}>
+        <Dialog.Title>Add a Title</Dialog.Title>
+        <Dialog.Description>
+          e.g., Raising wolves - good idea?
+          <Dialog.Input style={tw`p-4`} defaultValue="You can type in me" />
+        </Dialog.Description>
+        <Dialog.Button label="Cancel" onPress={() => setVisible(false)} />
+        <Dialog.Button label="Set Title" onPress={() => setVisible(false)} />
+      </Dialog.Container>
+    </View>
+  );
+};
+
 const CreateRoom = ({ roomRef }) => {
   const onBackButtonPress = () => {
     console.log("test");
   };
+  const [visible, setVisible] = useState(false);
+
   const renderItem = (item) => {
     return (
       <View style={tw`px-3 pt-6`}>
@@ -62,7 +88,8 @@ const CreateRoom = ({ roomRef }) => {
       }}
       HeaderComponent={
         <View style={tw`px-4 pt-4`}>
-          <TouchableOpacity>
+          <AlertBox visible={visible} setVisible={setVisible} />
+          <TouchableOpacity onPress={() => setVisible(true)}>
             <Text style={tw`text-base font-bold text-right text-green-500`}>
               + Add a Topic
             </Text>

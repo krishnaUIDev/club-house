@@ -3,14 +3,12 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { Icon, Avatar } from "react-native-elements";
 
-const RoomCard = () => {
+const RoomCard = ({ club, subClub }) => {
   return (
-    <View style={tw`bg-white rounded-xl p-4 mb-4 shadow`}>
+    <View style={tw`bg-white rounded-3xl p-4 mb-3 shadow`}>
       <View style={tw`flex flex-row justify-between items-center flex-wrap`}>
         <View style={tw`flex flex-row items-center`}>
-          <Text style={tw`text-gray-500 font-medium uppercase`}>
-            Telugu house
-          </Text>
+          <Text style={tw`text-gray-500 font-medium uppercase`}>{club}</Text>
           <TouchableOpacity style={tw`pl-2`}>
             <Icon size={14} name="home" type="font-awesome" color="#27ae61" />
           </TouchableOpacity>
@@ -29,9 +27,7 @@ const RoomCard = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <Text style={tw`font-semibold text-sm`}>
-        Ekkada unna pakkanenvu unnatuu untunnadi
-      </Text>
+      <Text style={tw`font-semibold text-sm`}>{subClub}</Text>
       <View style={tw`w-full flex-row pt-2`}>
         <View style={tw`w-4/12 flex-row relative`}>
           <Image
