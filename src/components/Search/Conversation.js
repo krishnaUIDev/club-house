@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
 
 const Conversation = ({ icon, title, list }) => {
@@ -9,7 +9,16 @@ const Conversation = ({ icon, title, list }) => {
         <Text>{icon}</Text>
         <Text style={tw`text-sm font-semibold pl-1`}>{title}</Text>
       </View>
-      <Text style={tw`text-xs text-gray-600`}>{list}</Text>
+      {/* <FlatList
+        data={list}
+        keyExtractor={(item) => item.title}
+        // horizontal={false}
+        //numColumns={2}
+        renderItem={({ item: { title } }) => (
+          <Text style={tw`text-xs text-gray-600`}>{title}</Text>
+        )}
+      /> */}
+      {/* <Text style={tw`text-xs text-gray-600`}>{list}</Text> */}
     </View>
   );
 };
