@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import tw from "tailwind-react-native-classnames";
 import { View, TouchableOpacity } from "react-native";
@@ -13,8 +13,11 @@ import JoinedRoom from "./src/components/JoinedRoom";
 import Profile from "./src/components/Profile";
 import Messages from "./src/components/Messages";
 import UpdateUser from "./src/components/Profile/UpdateUser";
+import ChangeUser from "./src/components/Profile/ChangeUser";
 import Followers from "./src/components/Profile/Followers";
 import Following from "./src/components/Profile/Following";
+import { checkConnected } from "./network";
+import Connection from "./src/components/Connection";
 
 const Stack = createStackNavigator();
 
@@ -232,6 +235,30 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
+        name="changeUser"
+        component={ChangeUser}
+        options={{
+          title: "",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <Icon
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("ProfileScreen")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
         name="followers"
         component={Followers}
         options={{
@@ -308,8 +335,24 @@ const HomeStack = () => {
 };
 
 const StackRoutes = () => {
+  const [connectedStatus, setConnected] = useState(false);
+
+  checkConnected()
+    .then((res) => {
+      setConnected(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  let initialRouteName = "HomeStack";
+
+  if (!connectedStatus) {
+    return <Connection onCheck={checkConnected} />;
+  }
+
   return (
-    <Stack.Navigator initialRouteName="HomeStack">
+    <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen
         name="HomeStack"
         component={HomeStack}

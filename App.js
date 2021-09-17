@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { StatusBar } from "expo-status-bar";
 import { View, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "react-native-gesture-handler";
@@ -24,6 +24,7 @@ export default function App() {
           </KeyboardAvoidingView>
         </SafeAreaProvider>
       </NavigationContainer>
+      <StatusBar style="auto" />
       <FlashMessage />
     </Provider>
   );

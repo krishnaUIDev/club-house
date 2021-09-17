@@ -28,7 +28,7 @@ const index = () => {
       [
         {
           text: "Correct my legal name...",
-          onPress: () => console.log("Ask me later pressed"),
+          onPress: () => navigation.navigate("changeUser"),
         },
         {
           text: "Add my creator alias...",

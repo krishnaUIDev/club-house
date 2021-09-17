@@ -87,6 +87,8 @@ const HomeScreen = () => {
               >
                 <TouchableOpacity
                   onPress={() => navigation.navigate("JoinedRoom")}
+                  activeOpacity={1}
+                  TouchableOpacity
                 >
                   <RoomCard club={club} subClub={subClub} />
                 </TouchableOpacity>
