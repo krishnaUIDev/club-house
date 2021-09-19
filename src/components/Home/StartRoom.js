@@ -5,22 +5,23 @@ import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import CreateRoom from "./CreateRoom";
 import { showMessage, hideMessage } from "react-native-flash-message";
+import IconComponent from "../Reuse/IconComponent";
 
-const StartRoom = () => {
+const StartRoom = ({ theme }) => {
   const roomRef = useRef(null);
   const onOpen = () => roomRef.current?.open();
   const navigation = useNavigation();
   return (
     <View>
       <View style={tw`flex flex-row justify-between items-center px-8 mb-4`}>
-        <TouchableOpacity>
-          <Icon
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <IconComponent
             style={tw`pr-6`}
             size={24}
             name="keypad"
             type="ionicon"
             color="#000"
-            onPress={() => navigation.openDrawer()}
+
             // onPress={() => {
             //   /* HERE WE GONE SHOW OUR FIRST MESSAGE */
             //   showMessage({
@@ -31,7 +32,6 @@ const StartRoom = () => {
             // }}
           />
         </TouchableOpacity>
-
         <TouchableOpacity
           onPress={onOpen}
           style={[
@@ -39,11 +39,16 @@ const StartRoom = () => {
             { backgroundColor: "#27ae61" },
           ]}
         >
-          <Icon name="plus" type="font-awesome" color="white" size={16} />
+          <IconComponent
+            name="plus"
+            type="font-awesome"
+            color="white"
+            size={16}
+          />
           <Text style={tw`text-white text-center text-xl`}>Start a room</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Icon
+          <IconComponent
             style={tw`pr-6`}
             size={24}
             name="paper-plane-o"

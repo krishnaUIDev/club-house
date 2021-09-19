@@ -10,6 +10,7 @@ import {
 import tw from "tailwind-react-native-classnames";
 import { Icon } from "react-native-elements";
 import Member from "../Member";
+import ThemeHook from "../Theme/ThemeHook";
 
 const apiData = [
   {
@@ -141,6 +142,7 @@ const apiData = [
 ];
 
 const index = () => {
+  const theme = ThemeHook();
   const [refreshing, setrefreshing] = useState(false);
   const [data, setdata] = useState(apiData);
   const onRefresh = () => {
@@ -151,12 +153,12 @@ const index = () => {
     }, 2000);
   };
   return (
-    <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
+    <SafeAreaView style={{ backgroundColor: theme ? "#000000" : "#f2f0e4" }}>
       <View
         style={[
           tw`h-full`,
           {
-            backgroundColor: "#f2f0e4",
+            backgroundColor: theme ? "#000000" : "#f2f0e4",
           },
         ]}
       >
@@ -182,7 +184,11 @@ const index = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={tw`py-4 rounded-t-3xl bg-white h-full relative`}>
+        <View
+          style={tw`py-4 rounded-t-3xl bg-white h-full relative ${
+            theme && "bg-gray-700"
+          }`}
+        >
           <View
             style={tw`flex flex-row justify-between items-center px-8 flex-wrap `}
           >
@@ -233,7 +239,9 @@ const index = () => {
             <View style={tw`absolute inset-x-0 bottom-16 right-0`}>
               <View
                 // onPress={() => navigation.navigate("HomeScreen")}
-                style={tw`bg-white z-50 p-3 rounded-l-full shadow-lg absolute flex self-end w-14 `}
+                style={tw`bg-white z-50 p-3 rounded-l-full shadow-lg absolute flex self-end w-14 ${
+                  theme && "bg-gray-400"
+                }`}
               >
                 <Icon
                   size={24}
@@ -253,7 +261,9 @@ const index = () => {
                 <TouchableOpacity
                   // onPress={() => navigation.navigate("JoinedRoom")}
                   style={[
-                    tw`flex flex-row justify-between px-4 py-2  items-center  rounded-full w-40 bg-gray-200`,
+                    tw`flex flex-row justify-between px-4 py-2  items-center  rounded-full w-40 bg-gray-200 ${
+                      theme && "bg-gray-300"
+                    }`,
                   ]}
                 >
                   <Text style={tw`text-base`}>✌🏽</Text>

@@ -1845,6 +1845,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-6.0.0.tgz#2a4d7190b508dd0c2293656c9c1aa068f6f60a71"
   integrity sha512-Z9M8VGcF2IZVOo2x+oUStvpCW/8HjIRi4+iQCu5n+PhC7OqCQX58KYAzdBr///alIfRXiu6oMb+lK+rXQH1FvQ==
 
+"@react-native-menu/menu@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@react-native-menu/menu/-/menu-0.5.1.tgz#0ce739568537bea5fa1b1409325e75d02144b93a"
+  integrity sha512-6tFTHQLRCep0VnfEBqMedgNIjNo1usL60BtZZ0nmqDU7ABMzQdoRWwcInCD4MyAU4l2XWU5Z24zf3PLmVFO8lQ==
+
 "@react-navigation/bottom-tabs@^6.0.5":
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-6.0.5.tgz#ece601449054bf555d4f5b2cc00f7a20eb6f557a"

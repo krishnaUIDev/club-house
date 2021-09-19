@@ -14,7 +14,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <SafeAreaProvider style={[tw``, { backgroundColor: "#f2f0e4" }]}>
+        <SafeAreaProvider>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}

@@ -10,6 +10,7 @@
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.0.0-alpha.25",
     "@react-native-community/netinfo": "6.0.0",
+    "@react-native-menu/menu": "^0.5.1",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/drawer": "^6.1.4",
     "@react-navigation/native": "^6.0.2",

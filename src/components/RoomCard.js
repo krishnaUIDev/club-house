@@ -3,9 +3,11 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { Icon, Avatar } from "react-native-elements";
 
-const RoomCard = ({ club, subClub }) => {
+const RoomCard = ({ club, subClub, theme }) => {
   return (
-    <View style={tw`bg-white rounded-3xl p-4 mb-3 shadow`}>
+    <View
+      style={tw`bg-white rounded-3xl p-4 mb-3 shadow ${theme && "bg-gray-700"}`}
+    >
       <View style={tw`flex flex-row justify-between items-center flex-wrap`}>
         <View style={tw`flex flex-row items-center`}>
           <Text style={tw`text-gray-500 font-medium uppercase`}>{club}</Text>

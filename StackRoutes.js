@@ -18,6 +18,7 @@ import Followers from "./src/components/Profile/Followers";
 import Following from "./src/components/Profile/Following";
 import { checkConnected } from "./network";
 import Connection from "./src/components/Connection";
+import IconComponent from "./src/components/Reuse/IconComponent";
 
 const Stack = createStackNavigator();
 
@@ -42,7 +43,7 @@ const StartRoutes = () => {
           },
           headerLeft: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 name="angle-left"
                 type="font-awesome"
                 color="#000"
@@ -77,7 +78,7 @@ const HomeStack = () => {
         options={{
           title: "",
           headerLeft: () => (
-            <Icon
+            <IconComponent
               name="search-outline"
               type="ionicon"
               color="#000"
@@ -88,7 +89,7 @@ const HomeStack = () => {
           ),
           headerRight: () => (
             <View style={tw`flex flex-row content-center`}>
-              <Icon
+              <IconComponent
                 style={tw`pr-6`}
                 size={28}
                 name="mail-open-outline"
@@ -96,21 +97,21 @@ const HomeStack = () => {
                 color="#000"
                 onPress={() => navigation.navigate("InvitesScreen")}
               />
-              <Icon
+              <IconComponent
                 style={tw`pr-6`}
                 size={28}
                 name="calendar-outline"
                 type="ionicon"
                 color="#000"
               />
-              <Icon
+              <IconComponent
                 style={tw`pr-6`}
                 size={28}
                 name="notifications-outline"
                 type="ionicon"
                 color="#000"
               />
-              <Icon
+              <IconComponent
                 style={tw`pr-6`}
                 size={28}
                 name="person-circle-outline"
@@ -134,7 +135,7 @@ const HomeStack = () => {
           },
           headerLeft: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 name="angle-left"
                 type="font-awesome"
                 color="#000"
@@ -146,7 +147,7 @@ const HomeStack = () => {
           ),
           headerRight: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 style={tw`pr-6`}
                 size={20}
                 name="user-plus"
@@ -168,7 +169,7 @@ const HomeStack = () => {
           },
           headerLeft: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 name="angle-left"
                 type="font-awesome"
                 color="#000"
@@ -181,7 +182,7 @@ const HomeStack = () => {
           headerRight: () => (
             <View style={tw`flex flex-row items-center content-center`}>
               <TouchableOpacity>
-                <Icon
+                <IconComponent
                   style={tw`pr-6`}
                   size={20}
                   name="ellipsis-h"
@@ -189,7 +190,7 @@ const HomeStack = () => {
                 />
               </TouchableOpacity>
               <TouchableOpacity>
-                <Icon
+                <IconComponent
                   style={tw`pr-6`}
                   size={24}
                   name="pencil-square-o"
@@ -222,7 +223,7 @@ const HomeStack = () => {
           },
           headerLeft: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 name="angle-left"
                 type="font-awesome"
                 color="#000"
@@ -246,7 +247,7 @@ const HomeStack = () => {
           },
           headerLeft: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 name="angle-left"
                 type="font-awesome"
                 color="#000"
@@ -270,7 +271,7 @@ const HomeStack = () => {
           },
           headerLeft: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 name="angle-left"
                 type="font-awesome"
                 color="#000"
@@ -294,7 +295,7 @@ const HomeStack = () => {
           },
           headerLeft: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 name="angle-left"
                 type="font-awesome"
                 color="#000"
@@ -318,7 +319,7 @@ const HomeStack = () => {
           },
           headerLeft: () => (
             <TouchableOpacity>
-              <Icon
+              <IconComponent
                 name="angle-left"
                 type="font-awesome"
                 color="#000"

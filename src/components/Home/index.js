@@ -17,10 +17,12 @@ import {
 } from "@react-navigation/drawer";
 import { roomData } from "../data/intersets";
 import ScheduledRooms from "./ScheduledRooms";
+import ThemeHook from "../Theme/ThemeHook";
 
 const Drawer = createDrawerNavigator();
 
 const HomeScreen = () => {
+  const theme = ThemeHook();
   const navigation = useNavigation();
   const isDrawerOpen = useDrawerStatus() === "open";
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -37,7 +39,12 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={[tw`relative flex-1`, { backgroundColor: "#f2f0e4" }]}>
+    <View
+      style={[
+        tw`relative flex-1`,
+        { backgroundColor: theme ? "#000000" : "#f2f0e4" },
+      ]}
+    >
       <View>
         <ScheduledRooms />
       </View>
@@ -90,7 +97,7 @@ const HomeScreen = () => {
                   activeOpacity={1}
                   TouchableOpacity
                 >
-                  <RoomCard club={club} subClub={subClub} />
+                  <RoomCard club={club} subClub={subClub} theme={theme} />
                 </TouchableOpacity>
               </Animated.View>
             );
@@ -99,7 +106,7 @@ const HomeScreen = () => {
       </View>
       {!isDrawerOpen && (
         <View style={tw`absolute inset-x-0 bottom-4 h-16`}>
-          <StartRoom />
+          <StartRoom theme={theme}/>
         </View>
       )}
     </View>
