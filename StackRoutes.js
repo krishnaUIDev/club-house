@@ -19,6 +19,7 @@ import Following from "./src/components/Profile/Following";
 import { checkConnected } from "./network";
 import Connection from "./src/components/Connection";
 import IconComponent from "./src/components/Reuse/IconComponent";
+import OtpScreen from "./src/components/Welcome/OtpScreen";
 
 const Stack = createStackNavigator();
 
@@ -54,6 +55,11 @@ const StartRoutes = () => {
             </TouchableOpacity>
           ),
         }}
+      />
+      <Stack.Screen
+        name="OtpScreen"
+        component={OtpScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -346,7 +352,7 @@ const StackRoutes = () => {
       console.log(err);
     });
 
-  let initialRouteName = "HomeStack";
+  let initialRouteName = "StartStack";
 
   if (!connectedStatus) {
     return <Connection onCheck={checkConnected} />;

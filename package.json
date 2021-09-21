@@ -18,6 +18,8 @@
     "@reduxjs/toolkit": "^1.6.1",
     "expo": "~42.0.1",
     "expo-camera": "^11.2.2",
+    "expo-constants": "^11.0.2",
+    "expo-firebase-recaptcha": "^1.4.2",
     "expo-image-picker": "^10.2.3",
     "expo-permissions": "^12.1.1",
     "expo-status-bar": "~1.0.4",
