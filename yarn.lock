@@ -3428,6 +3428,14 @@ expo-asset@~8.3.3:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
+expo-barcode-scanner@~10.2.2:
+  version "10.2.2"
+  resolved "https://registry.yarnpkg.com/expo-barcode-scanner/-/expo-barcode-scanner-10.2.2.tgz#506256ce4aafae5b17da77dceeb52831de20971b"
+  integrity sha512-FWGyNB88kntUV1ckpEcCiq8iepu9EJO/cK0bDnp42ieydBhKlTPXH/d/3ipBFbE+Ia7MNfddjzmzbDCadJukcg==
+  dependencies:
+    "@expo/config-plugins" "^3.0.0"
+    expo-modules-core "~0.2.0"
+
 expo-camera@^11.2.2:
   version "11.2.2"
   resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-11.2.2.tgz#4df9e97e533c084caf8d88255def784c568d76f4"
@@ -3446,6 +3454,15 @@ expo-constants@^11.0.2, expo-constants@~11.0.1:
     "@expo/config" "^4.0.0"
     expo-modules-core "~0.2.0"
     uuid "^3.3.2"
+
+expo-contacts@~9.2.5:
+  version "9.2.5"
+  resolved "https://registry.yarnpkg.com/expo-contacts/-/expo-contacts-9.2.5.tgz#8af20a03cd9ceb1bc0c9c9fdc0ab91cd1854429e"
+  integrity sha512-7QYPuJX7c2l2f8d+92i1vimTckOifh0MjkJSllo1e8Cpr4qqvk+6CDItzvlD3dV6AcdMan0OCt2ANFp9q55BGA==
+  dependencies:
+    "@expo/config-plugins" "^3.0.0"
+    expo-modules-core "~0.2.0"
+    uuid "^3.4.0"
 
 expo-error-recovery@~2.2.0:
   version "2.2.0"

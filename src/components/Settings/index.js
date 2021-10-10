@@ -15,6 +15,7 @@ import IconComponent from "../Reuse/IconComponent";
 import { useNavigation } from "@react-navigation/native";
 import Account from "./Account";
 import QR from "./QR";
+import UserBarCodeScan from "./UserBarCodeScan";
 
 const Stack = createStackNavigator();
 
@@ -76,6 +77,27 @@ const index = () => {
           ),
         }}
       />
+      <Stack.Screen
+        name="UserBarCodeScan"
+        component={UserBarCodeScan}
+        options={{
+          title: "Scan user profile",
+          ...headerStyles,
+          headerLeft: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("settingsStack")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+
       <Stack.Screen
         name="qr"
         component={QR}
