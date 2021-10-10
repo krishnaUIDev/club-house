@@ -46,7 +46,9 @@ const Invites = () => {
               initial: updatedName,
             };
           });
-        setContacts(updated);
+
+        const filterd = updated.sort((a, b) => a.name.localeCompare(b.name));
+        setContacts(filterd);
       }
     }
   };

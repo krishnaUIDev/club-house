@@ -431,7 +431,7 @@ const StackRoutes = () => {
       console.log(err);
     });
 
-  let initialRouteName = "HomeStack";
+  let initialRouteName = "StartStack";
 
   if (!connectedStatus) {
     return <Connection onCheck={checkConnected} />;

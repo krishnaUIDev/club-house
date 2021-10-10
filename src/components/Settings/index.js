@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, Share } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import {
   CardStyleInterpolators,
@@ -34,6 +34,26 @@ const headerStyles = {
 
 const index = () => {
   const navigation = useNavigation();
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: "React Native",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <Stack.Navigator initialRouteName="settingsStack">
       <Stack.Screen
@@ -124,7 +144,7 @@ const index = () => {
                 color="#000"
                 size={26}
                 style={tw`pr-4`}
-                // onPress={() => navigation.navigate("Profile")}
+                onPress={() => onShare()}
               />
             </TouchableOpacity>
           ),
