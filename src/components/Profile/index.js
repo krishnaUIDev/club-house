@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import {
   Text,
   View,
@@ -10,16 +10,9 @@ import {
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
-import Settings from "../Settings";
-import Modal from "../BottomSheet/BottomSheet";
 
 const index = () => {
-  const modalizeRef = useRef(null);
   const navigation = useNavigation();
-
-  const onOpen = () => {
-    modalizeRef.current?.open();
-  };
 
   const createAlert = () =>
     Alert.alert(
@@ -129,11 +122,6 @@ const index = () => {
         <View>
           <Text style={tw`text-sm font-semibold`}>Member of</Text>
         </View>
-        {/* <>
-          <Modal refModal={modalizeRef}>
-            <Settings />
-          </Modal>
-        </> */}
       </View>
     </SafeAreaView>
   );

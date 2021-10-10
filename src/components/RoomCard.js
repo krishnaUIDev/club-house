@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import { Icon, Avatar } from "react-native-elements";
+import { Icon } from "react-native-elements";
 
 const RoomCard = ({ club, subClub, theme }) => {
   return (

@@ -18,6 +18,7 @@ import {
 import { roomData } from "../data/intersets";
 import ScheduledRooms from "./ScheduledRooms";
 import ThemeHook from "../Theme/ThemeHook";
+import ActionSheet from "react-native-actionsheet";
 
 const Drawer = createDrawerNavigator();
 
@@ -36,6 +37,14 @@ const HomeScreen = () => {
       setdata((data) => [...data]);
       setrefreshing(false);
     }, 2000);
+  };
+
+  let actionSheet = useRef();
+  var optionArray = ["Option 1", "Option 2", "Option 3", "Option 4", "Cancel"];
+
+  const showActionSheet = () => {
+    //To show the Bottom ActionSheet
+    actionSheet.current.show();
   };
 
   return (
@@ -94,6 +103,7 @@ const HomeScreen = () => {
               >
                 <TouchableOpacity
                   onPress={() => navigation.navigate("JoinedRoom")}
+                  onLongPress={() => showActionSheet()}
                   activeOpacity={1}
                   TouchableOpacity
                 >
@@ -103,10 +113,27 @@ const HomeScreen = () => {
             );
           }}
         />
+        <ActionSheet
+          ref={actionSheet}
+          // Title of the Bottom Sheet
+          title={"Which one do you like ?"}
+          // Options Array to show in bottom sheet
+          options={optionArray}
+          // Define cancel button index in the option array
+          // This will take the cancel option in bottom
+          // and will highlight it
+          cancelButtonIndex={4}
+          // Highlight any specific option
+          destructiveButtonIndex={1}
+          onPress={(index) => {
+            // Clicking on the option will give you alert
+            alert(optionArray[index]);
+          }}
+        />
       </View>
       {!isDrawerOpen && (
         <View style={tw`absolute inset-x-0 bottom-4 h-16`}>
-          <StartRoom theme={theme}/>
+          <StartRoom theme={theme} />
         </View>
       )}
     </View>

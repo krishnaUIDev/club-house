@@ -115,7 +115,6 @@ export const intersetsData = [
       { title: "Psychedelics", icon: "" },
       { title: "Fitness", icon: "" },
       { title: "Meditation", icon: "" },
-      { title: "Health", icon: "" },
       { title: "Medicine", icon: "" },
       { title: "Nutrition", icon: "" },
       { title: "Health", icon: "" },

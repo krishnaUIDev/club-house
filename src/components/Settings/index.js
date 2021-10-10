@@ -13,6 +13,7 @@ import Profile from "./Profile";
 import { TouchableOpacity } from "react-native";
 import IconComponent from "../Reuse/IconComponent";
 import { useNavigation } from "@react-navigation/native";
+import Account from "./Account";
 
 const Stack = createStackNavigator();
 
@@ -59,6 +60,26 @@ const index = () => {
         component={Interests}
         options={{
           title: "Intrests",
+          ...headerStyles,
+          headerLeft: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("settingsStack")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="account"
+        component={Account}
+        options={{
+          title: "Account",
           ...headerStyles,
           headerLeft: () => (
             <TouchableOpacity>

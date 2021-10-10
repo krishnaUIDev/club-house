@@ -69,7 +69,6 @@ const UserStack = () => {
       <Stack.Screen
         name="Settings"
         component={Settings}
-        // options={{ headerShown: false }}
         options={{
           title: "",
           headerShown: false,
@@ -77,18 +76,6 @@ const UserStack = () => {
           cardOverlayEnabled: true,
           gestureDirection: "vertical",
           cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
-          // headerRight: () => (
-          //   <TouchableOpacity>
-          //     <IconComponent
-          //       name="close-outline"
-          //       type="ionicon"
-          //       color="#000"
-          //       size={34}
-          //       style={tw`pr-4`}
-          //       onPress={() => navigation.navigate("Profile")}
-          //     />
-          //   </TouchableOpacity>
-          // ),
         }}
       />
       <Stack.Screen
@@ -96,6 +83,11 @@ const UserStack = () => {
         component={UpdateUser}
         options={{
           title: "",
+          headerStyle: {
+            backgroundColor: "#f2f0e4",
+            shadowColor: "#f2f0e4",
+            elevation: 0,
+          },
           headerTitleStyle: {
             fontWeight: "normal",
             fontSize: 16,
@@ -120,6 +112,11 @@ const UserStack = () => {
         component={ChangeUser}
         options={{
           title: "",
+          headerStyle: {
+            backgroundColor: "#f2f0e4",
+            shadowColor: "#f2f0e4",
+            elevation: 0,
+          },
           headerTitleStyle: {
             fontWeight: "normal",
             fontSize: 16,
@@ -144,6 +141,11 @@ const UserStack = () => {
         component={Followers}
         options={{
           title: "Followers",
+          headerStyle: {
+            backgroundColor: "#f2f0e4",
+            shadowColor: "#f2f0e4",
+            elevation: 0,
+          },
           headerTitleStyle: {
             fontWeight: "normal",
             fontSize: 16,
@@ -168,6 +170,11 @@ const UserStack = () => {
         component={Following}
         options={{
           title: "Following",
+          headerStyle: {
+            backgroundColor: "#f2f0e4",
+            shadowColor: "#f2f0e4",
+            elevation: 0,
+          },
           headerTitleStyle: {
             fontWeight: "normal",
             fontSize: 16,
