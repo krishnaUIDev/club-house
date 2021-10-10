@@ -14,6 +14,7 @@ import { TouchableOpacity } from "react-native";
 import IconComponent from "../Reuse/IconComponent";
 import { useNavigation } from "@react-navigation/native";
 import Account from "./Account";
+import QR from "./QR";
 
 const Stack = createStackNavigator();
 
@@ -70,6 +71,38 @@ const index = () => {
                 size={30}
                 style={tw`pl-4`}
                 onPress={() => navigation.navigate("settingsStack")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="qr"
+        component={QR}
+        options={{
+          title: "QR Code",
+          ...headerStyles,
+          headerLeft: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("settingsStack")}
+              />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="share-outline"
+                type="ionicon"
+                color="#000"
+                size={26}
+                style={tw`pr-4`}
+                // onPress={() => navigation.navigate("Profile")}
               />
             </TouchableOpacity>
           ),

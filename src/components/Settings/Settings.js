@@ -1,6 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Text, View, ScrollView, SafeAreaView } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { ListItem, Avatar, Switch, Icon } from "react-native-elements";
 
@@ -23,10 +29,26 @@ const Settings = () => {
               }}
             />
             <ListItem.Content>
-              <ListItem.Title>Krishna kk</ListItem.Title>
-              <ListItem.Subtitle>@krishnakondoju</ListItem.Subtitle>
+              <View
+                style={tw`flex flex-row items-center justify-between w-full`}
+              >
+                <View>
+                  <ListItem.Title>Krishna kk</ListItem.Title>
+                  <ListItem.Subtitle>@krishnakondoju</ListItem.Subtitle>
+                </View>
+                <TouchableOpacity
+                  style={tw`bg-gray-100 z-50 p-2 rounded-full shadow-sm`}
+                  onPress={() => navigation.navigate("qr")}
+                >
+                  <Icon
+                    size={24}
+                    name="qr-code-outline"
+                    type="ionicon"
+                    color="#286ef0"
+                  />
+                </TouchableOpacity>
+              </View>
             </ListItem.Content>
-            <ListItem.Chevron />
           </ListItem>
         </View>
         <View style={tw`px-3 py-4`}>

@@ -40,10 +40,9 @@ const HomeScreen = () => {
   };
 
   let actionSheet = useRef();
-  var optionArray = ["Option 1", "Option 2", "Option 3", "Option 4", "Cancel"];
+  var optionArray = ["Show me fewer like this", "Report room title", "Cancel"];
 
   const showActionSheet = () => {
-    //To show the Bottom ActionSheet
     actionSheet.current.show();
   };
 
@@ -115,19 +114,11 @@ const HomeScreen = () => {
         />
         <ActionSheet
           ref={actionSheet}
-          // Title of the Bottom Sheet
-          title={"Which one do you like ?"}
-          // Options Array to show in bottom sheet
           options={optionArray}
-          // Define cancel button index in the option array
-          // This will take the cancel option in bottom
-          // and will highlight it
-          cancelButtonIndex={4}
-          // Highlight any specific option
+          cancelButtonIndex={2}
           destructiveButtonIndex={1}
           onPress={(index) => {
-            // Clicking on the option will give you alert
-            alert(optionArray[index]);
+            /* do something */
           }}
         />
       </View>
