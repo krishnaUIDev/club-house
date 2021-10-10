@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from "@react-navigation/stack";
 import tw from "tailwind-react-native-classnames";
-import { View, TouchableOpacity } from "react-native";
-import { Icon } from "react-native-elements";
+import { View, TouchableOpacity, Easing } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Home from "./src/components/Home";
 import Search from "./src/components/Search";
@@ -16,12 +18,178 @@ import UpdateUser from "./src/components/Profile/UpdateUser";
 import ChangeUser from "./src/components/Profile/ChangeUser";
 import Followers from "./src/components/Profile/Followers";
 import Following from "./src/components/Profile/Following";
+import EditDP from "./src/components/Profile/EditDP";
+import Settings from "./src/components/Settings";
+
 import { checkConnected } from "./network";
 import Connection from "./src/components/Connection";
 import IconComponent from "./src/components/Reuse/IconComponent";
 import OtpScreen from "./src/components/Welcome/OtpScreen";
 
 const Stack = createStackNavigator();
+
+const UserStack = () => {
+  const navigation = useNavigation();
+  return (
+    <Stack.Navigator initialRouteName="Profile">
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EditImage"
+        component={EditDP}
+        options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: "#f2f0e4",
+            shadowColor: "#f2f0e4",
+            elevation: 0,
+          },
+          gestureEnabled: true,
+          cardOverlayEnabled: true,
+          gestureDirection: "vertical",
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+          headerLeft: () => null,
+          headerRight: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="close-outline"
+                type="ionicon"
+                color="#000"
+                size={34}
+                style={tw`pr-4`}
+                onPress={() => navigation.navigate("Profile")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        // options={{ headerShown: false }}
+        options={{
+          title: "",
+          headerShown: false,
+          gestureEnabled: true,
+          cardOverlayEnabled: true,
+          gestureDirection: "vertical",
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+          // headerRight: () => (
+          //   <TouchableOpacity>
+          //     <IconComponent
+          //       name="close-outline"
+          //       type="ionicon"
+          //       color="#000"
+          //       size={34}
+          //       style={tw`pr-4`}
+          //       onPress={() => navigation.navigate("Profile")}
+          //     />
+          //   </TouchableOpacity>
+          // ),
+        }}
+      />
+      <Stack.Screen
+        name="user"
+        component={UpdateUser}
+        options={{
+          title: "",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("Profile")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="changeUser"
+        component={ChangeUser}
+        options={{
+          title: "",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("Profile")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="followers"
+        component={Followers}
+        options={{
+          title: "Followers",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("Profile")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="following"
+        component={Following}
+        options={{
+          title: "Following",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("Profile")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const StartRoutes = () => {
   const navigation = useNavigation();
@@ -209,109 +377,13 @@ const HomeStack = () => {
       />
       <Stack.Screen
         name="ProfileScreen"
-        component={Profile}
+        component={UserStack}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name="JoinedRoom"
         component={JoinedRoom}
         options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="user"
-        component={UpdateUser}
-        options={{
-          title: "",
-          headerTitleStyle: {
-            fontWeight: "normal",
-            fontSize: 16,
-            textTransform: "uppercase",
-          },
-          headerLeft: () => (
-            <TouchableOpacity>
-              <IconComponent
-                name="angle-left"
-                type="font-awesome"
-                color="#000"
-                size={30}
-                style={tw`pl-4`}
-                onPress={() => navigation.navigate("ProfileScreen")}
-              />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="changeUser"
-        component={ChangeUser}
-        options={{
-          title: "",
-          headerTitleStyle: {
-            fontWeight: "normal",
-            fontSize: 16,
-            textTransform: "uppercase",
-          },
-          headerLeft: () => (
-            <TouchableOpacity>
-              <IconComponent
-                name="angle-left"
-                type="font-awesome"
-                color="#000"
-                size={30}
-                style={tw`pl-4`}
-                onPress={() => navigation.navigate("ProfileScreen")}
-              />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="followers"
-        component={Followers}
-        options={{
-          title: "Followers",
-          headerTitleStyle: {
-            fontWeight: "normal",
-            fontSize: 16,
-            textTransform: "uppercase",
-          },
-          headerLeft: () => (
-            <TouchableOpacity>
-              <IconComponent
-                name="angle-left"
-                type="font-awesome"
-                color="#000"
-                size={30}
-                style={tw`pl-4`}
-                onPress={() => navigation.navigate("ProfileScreen")}
-              />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="following"
-        component={Following}
-        options={{
-          title: "Following",
-          headerTitleStyle: {
-            fontWeight: "normal",
-            fontSize: 16,
-            textTransform: "uppercase",
-          },
-          headerLeft: () => (
-            <TouchableOpacity>
-              <IconComponent
-                name="angle-left"
-                type="font-awesome"
-                color="#000"
-                size={30}
-                style={tw`pl-4`}
-                onPress={() => navigation.navigate("ProfileScreen")}
-              />
-            </TouchableOpacity>
-          ),
-        }}
       />
       <Stack.Screen
         name="InvitesScreen"
@@ -352,7 +424,7 @@ const StackRoutes = () => {
       console.log(err);
     });
 
-  let initialRouteName = "StartStack";
+  let initialRouteName = "HomeStack";
 
   if (!connectedStatus) {
     return <Connection onCheck={checkConnected} />;

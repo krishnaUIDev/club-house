@@ -68,12 +68,12 @@ const index = () => {
             name="cog-outline"
             type="ionicon"
             color="#000"
-            onPress={onOpen}
+            onPress={() => navigation.navigate("Settings")}
           />
         </View>
       </View>
       <View style={[tw`flex h-full px-6 py-4`]}>
-        <TouchableOpacity onPress={onOpen}>
+        <TouchableOpacity onPress={() => navigation.navigate("EditImage")}>
           <Image
             source={{
               uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
@@ -129,11 +129,11 @@ const index = () => {
         <View>
           <Text style={tw`text-sm font-semibold`}>Member of</Text>
         </View>
-        <>
+        {/* <>
           <Modal refModal={modalizeRef}>
             <Settings />
           </Modal>
-        </>
+        </> */}
       </View>
     </SafeAreaView>
   );
