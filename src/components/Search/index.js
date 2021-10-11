@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View, FlatList } from "react-native";
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
+import { auth } from "../../firebase";
 import { intersetsData } from "../data/intersets";
 import InputComponent from "../Reuse/InputComponent";
 import Conversation from "./Conversation";
+import firebase from "firebase/app";
+import "firebase/database";
 
 const Index = () => {
   return (

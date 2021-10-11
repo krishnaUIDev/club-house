@@ -15,7 +15,7 @@ const ChangeUser = () => {
       <Text style={tw`text-xl font-semibold`}>Correct your username?</Text>
       <View style={tw`flex flex-row mx-10 mt-8`}>
         <Input
-          placeholder="first name"
+          placeholder="user name"
           inputContainerStyle={{
             borderRadius: 4,
             backgroundColor: "#ffff",

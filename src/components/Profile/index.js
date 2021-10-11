@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   Text,
   View,
@@ -10,9 +11,11 @@ import {
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
+import { getUserDetails } from "../../slices/userSlice";
 
 const index = () => {
   const navigation = useNavigation();
+  const user = useSelector(getUserDetails);
 
   const createAlert = () =>
     Alert.alert(
@@ -21,7 +24,7 @@ const index = () => {
       [
         {
           text: "Correct my legal name...",
-          onPress: () => navigation.navigate("changeUser"),
+          onPress: () => navigation.navigate("user"),
         },
         {
           text: "Add my creator alias...",
@@ -69,15 +72,15 @@ const index = () => {
         <TouchableOpacity onPress={() => navigation.navigate("EditImage")}>
           <Image
             source={{
-              uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+              uri: user?.image,
             }}
             style={[tw`rounded-3xl h-24 w-24`]}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={createAlert}>
-          <Text style={tw`text-lg font-bold pt-2`}>Krishna</Text>
+          <Text style={tw`text-lg font-bold pt-2`}>{user?.name}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("user")}>
+        <TouchableOpacity onPress={() => navigation.navigate("changeUser")}>
           <Text style={tw`text-base font-normal pb-6`}>@Krishna</Text>
         </TouchableOpacity>
         <View style={tw`flex-row pb-6`}>

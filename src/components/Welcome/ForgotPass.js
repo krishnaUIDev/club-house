@@ -1,10 +1,21 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, SafeAreaView, View } from "react-native";
-import { Icon } from "react-native-elements";
+import { Button, Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
+import { auth } from "../../firebase";
 import Container from "./Container";
 
 const ForgotPass = ({ navigation }) => {
+  const reset = async (email) => {
+    try {
+      await auth.sendPasswordResetEmail(email);
+      alert("Password reset link sent!");
+    } catch (err) {
+      alert(
+        "There is no user record corresponding to this identifier. The user may have been deleted"
+      );
+    }
+  };
   return (
     <SafeAreaView style={tw`flex-1`}>
       <TouchableOpacity
@@ -15,7 +26,12 @@ const ForgotPass = ({ navigation }) => {
       >
         <Icon name="arrow-back-outline" type="ionicon" color="#fff" />
       </TouchableOpacity>
-      <View></View>
+      <View style={tw`mt-36`}>
+        <Button
+          onPress={() => reset("krishn.kondoju007@gmail.com")}
+          title="test"
+        />
+      </View>
       <Container />
     </SafeAreaView>
   );

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import ButtonComponent from "../Reuse/ButtonComponent";
 import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
+import { useSelector } from "react-redux";
+import { getUserDetails } from "../../slices/userSlice";
+import { auth } from "../../firebase";
+import { Button } from "react-native-elements";
 
 const EditDP = () => {
   const [profile, setProfile] = useState(null);
+  const user = useSelector(getUserDetails);
 
   const getPermission = async () => {
     if (Platform.OS !== "web") {
@@ -50,15 +54,17 @@ const EditDP = () => {
       <TouchableOpacity onPress={handleAddProfilePic}>
         <Image
           source={{
-            uri: profile
-              ? profile
-              : "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+            uri: profile ? profile : user?.image,
           }}
           style={[tw`rounded-full h-36 w-36 mt-20`]}
         />
       </TouchableOpacity>
       <View style={tw`mt-10`}>
-        <ButtonComponent buttonColor="#5576ab" label="Done" />
+        <Button
+          title="Done"
+          containerStyle={{ width: 120, borderRadius: 25 }}
+          disabled={profile === null}
+        />
       </View>
     </View>
   );

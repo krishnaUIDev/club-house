@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TouchableOpacity,
   SafeAreaView,
@@ -15,16 +15,20 @@ import {
   createDrawerNavigator,
   useDrawerStatus,
 } from "@react-navigation/drawer";
-import { roomData } from "../data/intersets";
+import { intersetsData, roomData } from "../data/intersets";
 import ScheduledRooms from "./ScheduledRooms";
 import ThemeHook from "../Theme/ThemeHook";
 import ActionSheet from "react-native-actionsheet";
+import { auth, db } from "../../firebase";
+import { setUser } from "../../slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const Drawer = createDrawerNavigator();
 
 const HomeScreen = () => {
   const theme = ThemeHook();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const isDrawerOpen = useDrawerStatus() === "open";
   const scrollY = useRef(new Animated.Value(0)).current;
   const ITEM_SIZE = 75 * 3;
@@ -38,6 +42,19 @@ const HomeScreen = () => {
       setrefreshing(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    dispatch(
+      setUser({
+        image:
+          auth?.currentUser?.photoURL ||
+          "https://i.pinimg.com/236x/a2/9f/f2/a29ff208bd06dc6a002fd5bf69b380b6--surgery-humor-tech-humor.jpg",
+        email: auth?.currentUser?.email,
+        name: auth?.currentUser?.displayName,
+        phone: auth?.currentUser?.phoneNumber,
+      })
+    );
+  }, [auth]);
 
   let actionSheet = useRef();
   var optionArray = ["Show me fewer like this", "Report room title", "Cancel"];

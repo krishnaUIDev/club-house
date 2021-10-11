@@ -57,25 +57,6 @@ const SignIn = () => {
       });
   };
 
-  // const handleSubmitPress = () => {
-  //   if (userEmail === "" && userPassword === "") {
-  //     setErrortext({
-  //       emailError: "Please enter email",
-  //       passWordError: "Please enter password",
-  //     });
-  //   }
-  //   firebase
-  //     .auth()
-  //     .signInWithEmailAndPassword(userEmail, userPassword)
-  //     .then((result) => {
-  //       console.log(result);
-  //       navigation.navigate("DrawerNavigationRoutes");
-  //     })
-  //     .catch((error) => {
-  //       setError(error);
-  //     });
-  // };
-
   return (
     <KeyboardAvoidingView enabled behavior="padding" style={tw`flex-1`}>
       <View style={tw`mt-60`}>

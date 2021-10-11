@@ -5,9 +5,12 @@ import QRCode from "react-native-qrcode-svg";
 import { Avatar } from "react-native-elements";
 import ButtonComponent from "../Reuse/ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { getUserDetails } from "../../slices/userSlice";
 
 const QR = () => {
   const navigation = useNavigation();
+  const user = useSelector(getUserDetails);
 
   return (
     <View style={[tw`h-full relative`, { backgroundColor: "#f2f0e4" }]}>
@@ -16,14 +19,14 @@ const QR = () => {
           size="large"
           rounded
           source={{
-            uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+            uri: user?.image,
           }}
         />
       </View>
       <View
         style={tw`bg-white p-4 pt-10 mt-20 shadow-lg rounded-lg flex items-center mx-8`}
       >
-        <Text style={tw`text-base font-bold`}>Krishna</Text>
+        <Text style={tw`text-base font-bold`}>{user?.name}</Text>
         <Text style={tw`text-base font-light`}>Clubhouse account</Text>
         <View style={tw`bg-white shadow-md p-4 mt-2 rounded-lg`}>
           <QRCode

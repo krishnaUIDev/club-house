@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Text,
   View,
@@ -10,12 +11,14 @@ import {
 import tw from "tailwind-react-native-classnames";
 import { ListItem, Avatar, Switch, Icon, Button } from "react-native-elements";
 import { auth } from "../../firebase";
+import { getUserDetails } from "../../slices/userSlice";
 
 const Settings = () => {
   const navigation = useNavigation();
   const [notification, setNotification] = useState(false);
   const [fewNotification, setFewNotification] = useState(false);
   const [audio, setAudio] = useState(false);
+  const user = useSelector(getUserDetails);
 
   const handleLogout = () => {
     auth
@@ -25,7 +28,6 @@ const Settings = () => {
       })
       .catch((err) => console.log(err));
   };
-
   return (
     <SafeAreaView style={[tw`h-full p-2 pt-1`, { backgroundColor: "#f2f0e4" }]}>
       <ScrollView>
@@ -35,7 +37,7 @@ const Settings = () => {
               size="medium"
               rounded
               source={{
-                uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+                uri: user?.image,
               }}
             />
             <ListItem.Content>
@@ -43,7 +45,7 @@ const Settings = () => {
                 style={tw`flex flex-row items-center justify-between w-full`}
               >
                 <View>
-                  <ListItem.Title>Krishna kk</ListItem.Title>
+                  <ListItem.Title>{user?.name}</ListItem.Title>
                   <ListItem.Subtitle>@krishnakondoju</ListItem.Subtitle>
                 </View>
                 <TouchableOpacity
