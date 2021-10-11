@@ -64,7 +64,7 @@ const Welcome = () => {
       </Text>
       <View style={tw`absolute inset-x-0 bottom-0 h-24 items-center`}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("LoginScreen")}
+          onPress={() => navigation.replace("LoginScreen")}
           style={[
             tw`flex flex-row justify-between px-4 py-3  items-center  rounded-full w-48`,
             { backgroundColor: "#5576ab" },

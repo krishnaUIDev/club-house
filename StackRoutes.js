@@ -11,6 +11,9 @@ import Search from "./src/components/Search";
 import Invites from "./src/components/Invites";
 import Welcome from "./src/components/Welcome";
 import SignIn from "./src/components/Welcome/SignIn";
+import Signup from "./src/components/Welcome/Signup";
+import ForgotPass from "./src/components/Welcome/ForgotPass";
+
 import JoinedRoom from "./src/components/JoinedRoom";
 import Profile from "./src/components/Profile";
 import Messages from "./src/components/Messages";
@@ -210,26 +213,18 @@ const StartRoutes = () => {
       <Stack.Screen
         name="LoginScreen"
         component={SignIn}
-        options={{
-          title: "",
-          headerStyle: {
-            backgroundColor: "#f2f0e4",
-            shadowColor: "#f2f0e4",
-            elevation: 0,
-          },
-          headerLeft: () => (
-            <TouchableOpacity>
-              <IconComponent
-                name="angle-left"
-                type="font-awesome"
-                color="#000"
-                size={30}
-                style={tw`pl-4`}
-                onPress={() => navigation.navigate("welcomeScreen")}
-              />
-            </TouchableOpacity>
-          ),
-        }}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="forgotPass"
+        component={ForgotPass}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="signup"
+        component={Signup}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="OtpScreen"

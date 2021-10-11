@@ -8,13 +8,23 @@ import {
   TouchableOpacity,
 } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import { ListItem, Avatar, Switch, Icon } from "react-native-elements";
+import { ListItem, Avatar, Switch, Icon, Button } from "react-native-elements";
+import { auth } from "../../firebase";
 
 const Settings = () => {
   const navigation = useNavigation();
   const [notification, setNotification] = useState(false);
   const [fewNotification, setFewNotification] = useState(false);
   const [audio, setAudio] = useState(false);
+
+  const handleLogout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("StartStack");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <SafeAreaView style={[tw`h-full p-2 pt-1`, { backgroundColor: "#f2f0e4" }]}>
@@ -149,6 +159,14 @@ const Settings = () => {
             </ListItem.Content>
             <ListItem.Chevron />
           </ListItem>
+        </View>
+        <View style={tw`px-3 py-2`}>
+          <Button
+            title="Logout"
+            titleStyle={{ color: "red" }}
+            buttonStyle={{ backgroundColor: "white" }}
+            onPress={() => handleLogout()}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
