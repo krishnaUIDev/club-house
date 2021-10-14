@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Text, TouchableOpacity, View, Image } from "react-native";
+import { Text, TouchableOpacity, View, Image, Alert } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
-import { useSelector } from "react-redux";
-import { getUserDetails } from "../../slices/userSlice";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { Button } from "react-native-elements";
+import AuthHook from "../customHook/AuthHook";
+import { useNavigation } from "@react-navigation/native";
 
 const EditDP = () => {
   const [profile, setProfile] = useState(null);
-  const user = useSelector(getUserDetails);
+  const user = AuthHook();
+  const navigation = useNavigation();
 
   const getPermission = async () => {
     if (Platform.OS !== "web") {
@@ -43,6 +44,19 @@ const EditDP = () => {
     }
     pickImage();
   };
+
+  const handleUpdate = () => {
+    db.collection("users")
+      .doc(auth?.currentUser?.uid)
+      .update({ photoURL: profile })
+      .then(() => {
+        Alert.alert(
+          "Profile Updated!",
+          "Your profile has been updated successfully.",
+          [{ text: "OK", onPress: () => navigation.navigate("Profile") }]
+        );
+      });
+  };
   return (
     <View
       style={[
@@ -54,7 +68,7 @@ const EditDP = () => {
       <TouchableOpacity onPress={handleAddProfilePic}>
         <Image
           source={{
-            uri: profile ? profile : user?.image,
+            uri: profile ? profile : user?.photoURL,
           }}
           style={[tw`rounded-full h-36 w-36 mt-20`]}
         />
@@ -64,6 +78,7 @@ const EditDP = () => {
           title="Done"
           containerStyle={{ width: 120, borderRadius: 25 }}
           disabled={profile === null}
+          onPress={() => handleUpdate()}
         />
       </View>
     </View>

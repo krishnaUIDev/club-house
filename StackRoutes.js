@@ -19,9 +19,14 @@ import Profile from "./src/components/Profile";
 import Messages from "./src/components/Messages";
 import UpdateUser from "./src/components/Profile/UpdateUser";
 import ChangeUser from "./src/components/Profile/ChangeUser";
+import UserInfo from "./src/components/Profile/UserInfo";
+
 import Followers from "./src/components/Profile/Followers";
 import Following from "./src/components/Profile/Following";
 import EditDP from "./src/components/Profile/EditDP";
+import AddInsta from "./src/components/Profile/AddInsta";
+import AddTwitter from "./src/components/Profile/AddTwitter";
+
 import Settings from "./src/components/Settings";
 
 import { checkConnected } from "./network";
@@ -70,6 +75,64 @@ const UserStack = () => {
         }}
       />
       <Stack.Screen
+        name="addTwitter"
+        component={AddTwitter}
+        options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: "#f2f0e4",
+            shadowColor: "#f2f0e4",
+            elevation: 0,
+          },
+          gestureEnabled: true,
+          cardOverlayEnabled: true,
+          gestureDirection: "vertical",
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+          headerLeft: () => null,
+          headerRight: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="close-outline"
+                type="ionicon"
+                color="#000"
+                size={34}
+                style={tw`pr-4`}
+                onPress={() => navigation.navigate("Profile")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="addInsta"
+        component={AddInsta}
+        options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: "#f2f0e4",
+            shadowColor: "#f2f0e4",
+            elevation: 0,
+          },
+          gestureEnabled: true,
+          cardOverlayEnabled: true,
+          gestureDirection: "vertical",
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+          headerLeft: () => null,
+          headerRight: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="close-outline"
+                type="ionicon"
+                color="#000"
+                size={34}
+                style={tw`pr-4`}
+                onPress={() => navigation.navigate("Profile")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
         name="Settings"
         component={Settings}
         options={{
@@ -84,6 +147,35 @@ const UserStack = () => {
       <Stack.Screen
         name="user"
         component={UpdateUser}
+        options={{
+          title: "",
+          headerStyle: {
+            backgroundColor: "#f2f0e4",
+            shadowColor: "#f2f0e4",
+            elevation: 0,
+          },
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+                onPress={() => navigation.navigate("Profile")}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="userInfo"
+        component={UserInfo}
         options={{
           title: "",
           headerStyle: {

@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import firebase from "firebase";
 import { Button, Avatar } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
@@ -19,7 +18,7 @@ import { Icon } from "react-native-elements";
 import Container from "./Container";
 import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 
 const Signup = () => {
   const navigation = useNavigation();
@@ -64,7 +63,15 @@ const Signup = () => {
     auth
       .createUserWithEmailAndPassword(email, pass)
       .then((result) => {
-        result.user.updateProfile({ displayName: name, photoURL: profile });
+        result.user.updateProfile({ displayName: name });
+        db.collection("users").doc(auth?.currentUser?.uid).set({
+          displayName: name,
+          createdAt: new Date(),
+          email: email,
+          photoURL: profile,
+          uid: auth?.currentUser?.uid,
+          accountId: "123",
+        });
         navigation.navigate("LoginScreen");
       })
       .catch((error) => {

@@ -12,13 +12,16 @@ import tw from "tailwind-react-native-classnames";
 import { ListItem, Avatar, Switch, Icon, Button } from "react-native-elements";
 import { auth } from "../../firebase";
 import { getUserDetails } from "../../slices/userSlice";
+import AuthHook from "../customHook/AuthHook";
 
 const Settings = () => {
   const navigation = useNavigation();
+  const user = AuthHook();
+
   const [notification, setNotification] = useState(false);
   const [fewNotification, setFewNotification] = useState(false);
   const [audio, setAudio] = useState(false);
-  const user = useSelector(getUserDetails);
+  // const user = useSelector(getUserDetails);
 
   const handleLogout = () => {
     auth
@@ -37,7 +40,7 @@ const Settings = () => {
               size="medium"
               rounded
               source={{
-                uri: user?.image,
+                uri: user?.photoURL,
               }}
             />
             <ListItem.Content>

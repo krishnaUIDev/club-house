@@ -1,69 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import {
   Text,
   View,
   Image,
   TouchableOpacity,
   SafeAreaView,
-  Alert,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
-import Dialog from "react-native-dialog";
-import AuthHook from "../customHook/AuthHook";
+import { getUserDetails } from "../../slices/userSlice";
 
-const AlertBox = ({ visible, setVisible }) => {
-  return (
-    <View>
-      <Dialog.Container visible={visible}>
-        <Dialog.Title>Update your Bio</Dialog.Title>
-        <Dialog.Description>
-          <Dialog.Input style={tw`w-32`} />
-        </Dialog.Description>
-        <Dialog.Button
-          label="Cancel"
-          bold={true}
-          onPress={() => setVisible(false)}
-        />
-        <Dialog.Button label="Update" onPress={() => setVisible(false)} />
-      </Dialog.Container>
-    </View>
-  );
-};
-
-const index = () => {
+const UserInfo = () => {
   const navigation = useNavigation();
-  const [user, setUser] = useState(null);
-
-  const userInfo = AuthHook();
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (userInfo) setUser(userInfo);
-  }, [userInfo]);
-
-  const createAlert = () =>
-    Alert.alert(
-      "Clubhouse is for real names",
-      "You can fix your legal name or add an optional creator alias if you are a puglic figure. This can only be changed once in a while",
-      [
-        {
-          text: "Correct my legal name...",
-          onPress: () => navigation.navigate("user"),
-        },
-        {
-          text: "Add my creator alias...",
-          onPress: () => console.log("Cancel Pressed"),
-        },
-        {
-          text: "Never mind",
-          onPress: () => console.log("OK Pressed"),
-          style: "cancel",
-        },
-      ],
-      { cancelable: false }
-    );
+  const user = useSelector(getUserDetails);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
@@ -85,30 +36,22 @@ const index = () => {
             type="ionicon"
             color="#000"
           />
-          <Icon
-            size={30}
-            name="cog-outline"
-            type="ionicon"
-            color="#000"
-            onPress={() => navigation.navigate("Settings")}
-          />
         </View>
       </View>
-      <AlertBox visible={visible} setVisible={setVisible} />
       <View style={[tw`flex h-full px-6 py-4`]}>
         <View style={tw`flex items-center`}>
-          <TouchableOpacity onPress={() => navigation.navigate("EditImage")}>
+          <TouchableOpacity>
             <Image
               source={{
-                uri: user?.photoURL,
+                uri: user?.image,
               }}
               style={[tw`rounded-3xl h-24 w-24`]}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={createAlert}>
-            <Text style={tw`text-lg font-bold pt-2`}>{user?.displayName}</Text>
+          <TouchableOpacity>
+            <Text style={tw`text-lg font-bold pt-2`}>{user?.name}</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("changeUser")}>
+          <TouchableOpacity>
             <Text style={tw`text-base font-normal pb-6`}>@Krishna</Text>
           </TouchableOpacity>
           <View style={tw`flex-row pb-6`}>
@@ -120,28 +63,24 @@ const index = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity onPress={() => setVisible(true)}>
-          <View style={tw`pb-6`}>
-            <Text style={tw`text-base font-normal py-2`}>
-              Hello I am new Here
-            </Text>
-          </View>
-        </TouchableOpacity>
+        <View style={tw`pb-6`}>
+          <Text style={tw`text-base font-normal py-2`}>
+            Hello I am new Here
+          </Text>
+        </View>
         <View style={tw`flex-row items-center pb-6`}>
-          <TouchableOpacity onPress={() => navigation.navigate("addTwitter")}>
+          <TouchableOpacity>
             <View style={tw`flex-row items-center`}>
               <Icon name="twitter" type="font-awesome" color="#5576aa" />
               <Text style={tw`pr-6 pl-1 text-base text-indigo-800`}>
-                Add Twitter
+                Krishna
               </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("addInsta")}>
+          <TouchableOpacity>
             <View style={tw`flex-row items-center`}>
               <Icon name="instagram" type="font-awesome" color="#5576aa" />
-              <Text style={[tw`pl-1 text-base text-indigo-800`]}>
-                Add Instagram
-              </Text>
+              <Text style={[tw`pl-1 text-base text-indigo-800`]}>Krishna</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -165,4 +104,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default UserInfo;
