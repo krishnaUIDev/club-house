@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Text, View, FlatList } from "react-native";
-import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import { auth } from "../../firebase";
 import { intersetsData } from "../data/intersets";

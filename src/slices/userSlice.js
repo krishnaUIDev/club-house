@@ -1,8 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { db } from "../firebase";
+
+export const fetchIntersets = createAsyncThunk("user/intresets", async () => {
+  const markers = [];
+  await db
+    .collection("intersetsData")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.docs.forEach((doc) => {
+        markers.push(doc.data());
+      });
+    });
+  return markers;
+});
 
 const initialState = {
   theme: false,
   user: {},
+  intrestData: [],
 };
 
 export const userSlice = createSlice({
@@ -10,10 +25,19 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload;
+      const { name, value } = action.payload;
+      state.user[name] = value;
     },
     setTheme: (state, action) => {
       state.theme = action.payload;
+    },
+  },
+  extraReducers: {
+    [fetchIntersets.fulfilled]: (state, action) => {
+      state.intrestData = action.payload;
+    },
+    [fetchIntersets.rejected]: (state, action) => {
+      state.intrestData = [];
     },
   },
 });

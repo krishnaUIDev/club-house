@@ -4,7 +4,7 @@ import {
   createStackNavigator,
 } from "@react-navigation/stack";
 import tw from "tailwind-react-native-classnames";
-import { View, TouchableOpacity, Easing } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Home from "./src/components/Home";
 import Search from "./src/components/Search";
@@ -17,6 +17,8 @@ import ForgotPass from "./src/components/Welcome/ForgotPass";
 import JoinedRoom from "./src/components/JoinedRoom";
 import Profile from "./src/components/Profile";
 import Messages from "./src/components/Messages";
+import ChatRoomScreen from "./src/components/Messages/ChatRoomScreen";
+
 import UpdateUser from "./src/components/Profile/UpdateUser";
 import ChangeUser from "./src/components/Profile/ChangeUser";
 import UserInfo from "./src/components/Profile/UserInfo";
@@ -33,6 +35,8 @@ import { checkConnected } from "./network";
 import Connection from "./src/components/Connection";
 import IconComponent from "./src/components/Reuse/IconComponent";
 import OtpScreen from "./src/components/Welcome/OtpScreen";
+import AuthHook from "./src/components/customHook/AuthHook";
+import { Avatar } from "react-native-elements/dist/avatar/Avatar";
 
 const Stack = createStackNavigator();
 
@@ -329,6 +333,7 @@ const StartRoutes = () => {
 
 const HomeStack = () => {
   const navigation = useNavigation();
+  const user = AuthHook();
   return (
     <Stack.Navigator
       initialRouteName="HomeScreen"
@@ -356,7 +361,7 @@ const HomeStack = () => {
             />
           ),
           headerRight: () => (
-            <View style={tw`flex flex-row content-center`}>
+            <View style={tw`flex flex-row items-center content-center pr-6`}>
               <IconComponent
                 style={tw`pr-6`}
                 size={28}
@@ -379,14 +384,24 @@ const HomeStack = () => {
                 type="ionicon"
                 color="#000"
               />
-              <IconComponent
-                style={tw`pr-6`}
-                size={28}
-                name="person-circle-outline"
-                type="ionicon"
-                color="#000"
-                onPress={() => navigation.navigate("ProfileScreen")}
-              />
+              {user?.photoURL ? (
+                <Avatar
+                  size={26}
+                  rounded
+                  source={{
+                    uri: user?.photoURL,
+                  }}
+                  onPress={() => navigation.navigate("ProfileScreen")}
+                />
+              ) : (
+                <IconComponent
+                  size={28}
+                  name="person-circle-outline"
+                  type="ionicon"
+                  color="#000"
+                  onPress={() => navigation.navigate("ProfileScreen")}
+                />
+              )}
             </View>
           ),
         }}
@@ -470,6 +485,14 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
+        name="chatRoomScreen"
+        component={ChatRoomScreen}
+        options={{
+          headerTitle: ChatRoomHeader,
+          headerBackTitleVisible: false,
+        }}
+      />
+      <Stack.Screen
         name="ProfileScreen"
         component={UserStack}
         options={{ headerShown: false }}
@@ -504,6 +527,14 @@ const HomeStack = () => {
         }}
       />
     </Stack.Navigator>
+  );
+};
+
+const ChatRoomHeader = (props) => {
+  return (
+    <View>
+      <Text>{props?.children}</Text>
+    </View>
   );
 };
 

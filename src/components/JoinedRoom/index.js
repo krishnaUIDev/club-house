@@ -11,6 +11,8 @@ import tw from "tailwind-react-native-classnames";
 import { Icon } from "react-native-elements";
 import Member from "../Member";
 import ThemeHook from "../Theme/ThemeHook";
+import AuthHook from "../customHook/AuthHook";
+import { useNavigation } from "@react-navigation/native";
 
 const apiData = [
   {
@@ -143,6 +145,9 @@ const apiData = [
 
 const index = () => {
   const theme = ThemeHook();
+  const user = AuthHook();
+  const navigation = useNavigation();
+
   const [refreshing, setrefreshing] = useState(false);
   const [data, setdata] = useState(apiData);
   const onRefresh = () => {
@@ -174,10 +179,12 @@ const index = () => {
               <Icon name="document-outline" type="ionicon" size={26} />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ProfileScreen")}
+            >
               <Image
                 source={{
-                  uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
+                  uri: user?.photoURL,
                 }}
                 style={[tw`rounded-full ml-8`, { height: 40, width: 40 }]}
               />

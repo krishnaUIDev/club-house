@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import {
   TouchableOpacity,
   SafeAreaView,
@@ -19,16 +20,12 @@ import { roomData } from "../data/intersets";
 import ScheduledRooms from "./ScheduledRooms";
 import ThemeHook from "../Theme/ThemeHook";
 import ActionSheet from "react-native-actionsheet";
-import { auth, db } from "../../firebase";
-import { setUser } from "../../slices/userSlice";
-import { useDispatch } from "react-redux";
-import AuthHook from "../customHook/AuthHook";
+import { fetchIntersets } from "../../slices/userSlice";
 
 const Drawer = createDrawerNavigator();
 
 const HomeScreen = () => {
   const theme = ThemeHook();
-  const userDetails = AuthHook();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const isDrawerOpen = useDrawerStatus() === "open";
@@ -45,6 +42,10 @@ const HomeScreen = () => {
       setrefreshing(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    dispatch(fetchIntersets);
+  }, [dispatch]);
 
   let actionSheet = useRef();
   var optionArray = ["Show me fewer like this", "Report room title", "Cancel"];

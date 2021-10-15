@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import {
   Text,
   View,
@@ -11,7 +10,6 @@ import {
 import tw from "tailwind-react-native-classnames";
 import { ListItem, Avatar, Switch, Icon, Button } from "react-native-elements";
 import { auth } from "../../firebase";
-import { getUserDetails } from "../../slices/userSlice";
 import AuthHook from "../customHook/AuthHook";
 
 const Settings = () => {
@@ -21,7 +19,6 @@ const Settings = () => {
   const [notification, setNotification] = useState(false);
   const [fewNotification, setFewNotification] = useState(false);
   const [audio, setAudio] = useState(false);
-  // const user = useSelector(getUserDetails);
 
   const handleLogout = () => {
     auth

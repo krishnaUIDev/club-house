@@ -55,9 +55,7 @@ const AlertBox = ({ visible, setVisible }) => {
 };
 
 const CreateRoom = ({ roomRef }) => {
-  const onBackButtonPress = () => {
-    console.log("test");
-  };
+  const onBackButtonPress = () => {};
   const [visible, setVisible] = useState(false);
 
   const renderItem = (item) => {

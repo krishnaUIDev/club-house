@@ -53,8 +53,6 @@ const Invites = () => {
     }
   };
 
-  // console.log(contacts);
-
   return (
     <View style={[tw`h-full p-2 pt-4`, { backgroundColor: "#f2f0e4" }]}>
       <Text style={tw`text-center text-base text-gray-700`}>

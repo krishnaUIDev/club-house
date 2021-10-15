@@ -24,15 +24,6 @@ const OtpScreen = ({
     sendVerification();
   }, []);
 
-  //   async function signInWithPhoneNumber() {
-  //     try {
-  //       const confirmation = await auth.signInWithPhoneNumber(phoneNumber);
-  //       console.log(confirmation);
-  //     } catch (e) {
-  //       alert(JSON.stringify(e));
-  //     }
-  //   }
-
   const recaptchaVerifier = React.useRef(null);
 
   const sendVerification = () => {

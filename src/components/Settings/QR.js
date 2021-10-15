@@ -5,12 +5,11 @@ import QRCode from "react-native-qrcode-svg";
 import { Avatar } from "react-native-elements";
 import ButtonComponent from "../Reuse/ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
-import { getUserDetails } from "../../slices/userSlice";
+import AuthHook from "../customHook/AuthHook";
 
 const QR = () => {
   const navigation = useNavigation();
-  const user = useSelector(getUserDetails);
+  const user = AuthHook();
 
   return (
     <View style={[tw`h-full relative`, { backgroundColor: "#f2f0e4" }]}>
@@ -19,7 +18,7 @@ const QR = () => {
           size="large"
           rounded
           source={{
-            uri: user?.image,
+            uri: user?.photoURL,
           }}
         />
       </View>
