@@ -7,52 +7,73 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { Icon } from "react-native-elements";
+import { Icon, Button } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
-import { getUserDetails } from "../../slices/userSlice";
 
-const UserInfo = () => {
+const UserInfo = ({
+  route: {
+    params: { user },
+  },
+}) => {
   const navigation = useNavigation();
-  const user = useSelector(getUserDetails);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
-      <View style={tw`flex-row justify-between px-3`}>
+      <View style={tw`flex flex-row justify-end px-6 pt-4 items-center`}>
         <TouchableOpacity>
           <Icon
-            name="chevron-back-outline"
+            style={tw`pr-4`}
+            size={30}
+            name="ellipsis-h"
+            type="font-awesome"
+            color="#989898"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Icon
+            name="close-outline"
             type="ionicon"
-            color="#000"
+            color="#989898"
             size={30}
             onPress={() => navigation.navigate("HomeScreen")}
           />
         </TouchableOpacity>
-        <View style={tw`flex flex-row content-center`}>
-          <Icon
-            style={tw`pr-6`}
-            size={30}
-            name="share-outline"
-            type="ionicon"
-            color="#000"
-          />
-        </View>
       </View>
       <View style={[tw`flex h-full px-6 py-4`]}>
-        <View style={tw`flex items-center`}>
-          <TouchableOpacity>
-            <Image
-              source={{
-                uri: user?.image,
-              }}
-              style={[tw`rounded-3xl h-24 w-24`]}
+        <View style={tw`flex`}>
+          <View style={tw`flex-row justify-between`}>
+            <TouchableOpacity>
+              <Image
+                source={{
+                  uri: user?.photoURL,
+                }}
+                style={[tw`rounded-full h-24 w-24`]}
+              />
+            </TouchableOpacity>
+            <Button
+              style={tw`mt-auto`}
+              type="outline"
+              title="Follow"
+              buttonStyle={{ height: 35, borderRadius: 25, borderWidth: 2 }}
+              titleStyle={{ fontSize: 14, marginLeft: 2 }}
+              icon={
+                <Icon
+                  name="person-add"
+                  type="ionicon"
+                  color="#2288dd"
+                  size={15}
+                />
+              }
             />
+          </View>
+          <TouchableOpacity>
+            <Text style={tw`text-lg font-bold pt-2`}>{user?.displayName}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={tw`text-lg font-bold pt-2`}>{user?.name}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={tw`text-base font-normal pb-6`}>@Krishna</Text>
+            <Text style={tw`text-base font-normal pb-6`}>
+              {user?.accountId}
+            </Text>
           </TouchableOpacity>
           <View style={tw`flex-row pb-6`}>
             <TouchableOpacity onPress={() => navigation.navigate("followers")}>

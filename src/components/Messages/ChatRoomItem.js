@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  Pressable,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const ChatRoomItem = ({ chatRoom }) => {
@@ -17,7 +10,7 @@ const ChatRoomItem = ({ chatRoom }) => {
     navigation.setOptions({ title: "test" });
   };
   return (
-    <Pressable style={styles.container} onPress={handle}>
+    <TouchableOpacity style={styles.container} onPress={handle}>
       <TouchableOpacity>
         <Image
           source={{
@@ -40,7 +33,7 @@ const ChatRoomItem = ({ chatRoom }) => {
           {chatRoom?.lastMessage?.content}
         </Text>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

@@ -5,11 +5,13 @@ import QRCode from "react-native-qrcode-svg";
 import { Avatar } from "react-native-elements";
 import ButtonComponent from "../Reuse/ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
-import AuthHook from "../customHook/AuthHook";
 
-const QR = () => {
+const QR = ({
+  route: {
+    params: { user },
+  },
+}) => {
   const navigation = useNavigation();
-  const user = AuthHook();
 
   return (
     <View style={[tw`h-full relative`, { backgroundColor: "#f2f0e4" }]}>
@@ -25,11 +27,11 @@ const QR = () => {
       <View
         style={tw`bg-white p-4 pt-10 mt-20 shadow-lg rounded-lg flex items-center mx-8`}
       >
-        <Text style={tw`text-base font-bold`}>{user?.name}</Text>
-        <Text style={tw`text-base font-light`}>Clubhouse account</Text>
+        <Text style={tw`text-base font-bold`}>{user?.displayName}</Text>
+        <Text style={tw`text-base font-light`}>{user?.accountId}</Text>
         <View style={tw`bg-white shadow-md p-4 mt-2 rounded-lg`}>
           <QRCode
-            value="this is value"
+            value={user?.accountId}
             color={"#000000"}
             backgroundColor={"white"}
             size={150}
@@ -48,7 +50,7 @@ const QR = () => {
         <ButtonComponent
           buttonColor="#5576ab"
           label="Scan"
-          onChange={() => navigation.navigate("UserBarCodeScan")}
+          onChange={() => navigation.navigate("UserBarCodeScan", {user})}
         />
       </View>
     </View>

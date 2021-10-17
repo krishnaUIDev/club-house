@@ -35,7 +35,6 @@ const AlertBox = ({ visible, setVisible }) => {
 const index = () => {
   const navigation = useNavigation();
   const [user, setUser] = useState(null);
-
   const userInfo = AuthHook();
   const [visible, setVisible] = useState(false);
 
@@ -67,26 +66,26 @@ const index = () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
-      <View style={tw`flex-row justify-between px-3`}>
+      <View style={tw`flex-row justify-between px-3 items-center`}>
         <TouchableOpacity>
           <Icon
             name="chevron-back-outline"
             type="ionicon"
             color="#000"
-            size={30}
+            size={26}
             onPress={() => navigation.navigate("HomeScreen")}
           />
         </TouchableOpacity>
         <View style={tw`flex flex-row content-center`}>
           <Icon
             style={tw`pr-6`}
-            size={30}
+            size={26}
             name="share-outline"
             type="ionicon"
             color="#000"
           />
           <Icon
-            size={30}
+            size={26}
             name="cog-outline"
             type="ionicon"
             color="#000"
@@ -109,7 +108,9 @@ const index = () => {
             <Text style={tw`text-lg font-bold pt-2`}>{user?.displayName}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("changeUser")}>
-            <Text style={tw`text-base font-normal pb-6`}>@Krishna</Text>
+            <Text style={tw`text-base font-normal pb-6`}>
+              {user?.accountId}
+            </Text>
           </TouchableOpacity>
           <View style={tw`flex-row pb-6`}>
             <TouchableOpacity onPress={() => navigation.navigate("followers")}>

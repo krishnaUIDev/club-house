@@ -4,6 +4,7 @@ import Message from "./Message";
 import chatRoomData from "../data/chats";
 import MessageInput from "./MessageInput";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import { ListItem, Button } from "react-native-elements";
 
 const ChatRoomScreen = () => {
   const route = useRoute();

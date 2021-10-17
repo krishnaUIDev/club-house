@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   CardStyleInterpolators,
+  HeaderStyleInterpolators,
   createStackNavigator,
 } from "@react-navigation/stack";
 import tw from "tailwind-react-native-classnames";
@@ -18,6 +19,7 @@ import JoinedRoom from "./src/components/JoinedRoom";
 import Profile from "./src/components/Profile";
 import Messages from "./src/components/Messages";
 import ChatRoomScreen from "./src/components/Messages/ChatRoomScreen";
+import NewMessage from "./src/components/Messages/NewMessage";
 
 import UpdateUser from "./src/components/Profile/UpdateUser";
 import ChangeUser from "./src/components/Profile/ChangeUser";
@@ -181,29 +183,7 @@ const UserStack = () => {
         name="userInfo"
         component={UserInfo}
         options={{
-          title: "",
-          headerStyle: {
-            backgroundColor: "#f2f0e4",
-            shadowColor: "#f2f0e4",
-            elevation: 0,
-          },
-          headerTitleStyle: {
-            fontWeight: "normal",
-            fontSize: 16,
-            textTransform: "uppercase",
-          },
-          headerLeft: () => (
-            <TouchableOpacity>
-              <IconComponent
-                name="angle-left"
-                type="font-awesome"
-                color="#000"
-                size={30}
-                style={tw`pl-4`}
-                onPress={() => navigation.navigate("Profile")}
-              />
-            </TouchableOpacity>
-          ),
+          headerShown: false,
         }}
       />
       <Stack.Screen
@@ -441,56 +421,9 @@ const HomeStack = () => {
         }}
       />
       <Stack.Screen
-        name="MessageScreen"
-        component={Messages}
-        options={{
-          title: "BACKCHANNEL",
-          headerTitleStyle: {
-            fontWeight: "normal",
-            fontSize: 16,
-            textTransform: "uppercase",
-          },
-          headerLeft: () => (
-            <TouchableOpacity>
-              <IconComponent
-                name="angle-left"
-                type="font-awesome"
-                color="#000"
-                size={30}
-                style={tw`pl-4`}
-                onPress={() => navigation.navigate("HomeScreen")}
-              />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <View style={tw`flex flex-row items-center content-center`}>
-              <TouchableOpacity>
-                <IconComponent
-                  style={tw`pr-6`}
-                  size={20}
-                  name="ellipsis-h"
-                  type="font-awesome"
-                />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <IconComponent
-                  style={tw`pr-6`}
-                  size={24}
-                  name="pencil-square-o"
-                  type="font-awesome"
-                />
-              </TouchableOpacity>
-            </View>
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="chatRoomScreen"
-        component={ChatRoomScreen}
-        options={{
-          headerTitle: ChatRoomHeader,
-          headerBackTitleVisible: false,
-        }}
+        name="chatStack"
+        component={ChatStack}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="ProfileScreen"
@@ -535,6 +468,77 @@ const ChatRoomHeader = (props) => {
     <View>
       <Text>{props?.children}</Text>
     </View>
+  );
+};
+
+const ChatStack = () => {
+  const navigation = useNavigation();
+  return (
+    <Stack.Navigator initialRouteName={"MessageScreen"}>
+      <Stack.Screen
+        name="MessageScreen"
+        component={Messages}
+        options={{
+          title: "BACKCHANNEL",
+          headerTitleStyle: {
+            fontWeight: "normal",
+            fontSize: 16,
+            textTransform: "uppercase",
+          },
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
+              <IconComponent
+                name="angle-left"
+                type="font-awesome"
+                color="#000"
+                size={30}
+                style={tw`pl-4`}
+              />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <View style={tw`flex flex-row items-center content-center`}>
+              <TouchableOpacity>
+                <IconComponent
+                  style={tw`pr-6`}
+                  size={20}
+                  name="ellipsis-h"
+                  type="font-awesome"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("newMessage")}
+              >
+                <IconComponent
+                  style={tw`pr-6`}
+                  size={24}
+                  name="pencil-square-o"
+                  type="font-awesome"
+                />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="chatRoomScreen"
+        component={ChatRoomScreen}
+        options={{
+          headerTitle: ChatRoomHeader,
+          headerBackTitleVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="newMessage"
+        component={NewMessage}
+        options={{
+          headerTitle: "NEW MESSAGE",
+          headerBackTitleVisible: false,
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+          headerStyleInterpolator: HeaderStyleInterpolators.forStatic,
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 

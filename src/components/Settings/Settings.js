@@ -15,7 +15,6 @@ import AuthHook from "../customHook/AuthHook";
 const Settings = () => {
   const navigation = useNavigation();
   const user = AuthHook();
-
   const [notification, setNotification] = useState(false);
   const [fewNotification, setFewNotification] = useState(false);
   const [audio, setAudio] = useState(false);
@@ -45,12 +44,12 @@ const Settings = () => {
                 style={tw`flex flex-row items-center justify-between w-full`}
               >
                 <View>
-                  <ListItem.Title>{user?.name}</ListItem.Title>
-                  <ListItem.Subtitle>@krishnakondoju</ListItem.Subtitle>
+                  <ListItem.Title>{user?.displayName}</ListItem.Title>
+                  <ListItem.Subtitle> {user?.accountId}</ListItem.Subtitle>
                 </View>
                 <TouchableOpacity
                   style={tw`bg-gray-100 z-50 p-2 rounded-full shadow-sm`}
-                  onPress={() => navigation.navigate("qr")}
+                  onPress={() => navigation.navigate("qr", { user })}
                 >
                   <Icon
                     size={24}

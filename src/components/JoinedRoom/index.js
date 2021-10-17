@@ -8,11 +8,12 @@ import {
   FlatList,
 } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import { Icon } from "react-native-elements";
+import { Icon, Tooltip } from "react-native-elements";
 import Member from "../Member";
 import ThemeHook from "../Theme/ThemeHook";
 import AuthHook from "../customHook/AuthHook";
 import { useNavigation } from "@react-navigation/native";
+import ActionSheet from "react-native-actionsheet";
 
 const apiData = [
   {
@@ -157,6 +158,20 @@ const index = () => {
       setrefreshing(false);
     }, 2000);
   };
+
+  let actionSheet = React.useRef();
+  var optionArray = [
+    "Share Room",
+    "Report a recent speaker",
+    "Search Room",
+    "Review ClubRules",
+    "Cancel",
+  ];
+
+  const handlePress = () => {
+    actionSheet.current.show();
+  };
+
   return (
     <SafeAreaView style={{ backgroundColor: theme ? "#000000" : "#f2f0e4" }}>
       <View
@@ -171,12 +186,12 @@ const index = () => {
           style={tw`flex flex-row py-6 px-4 items-center justify-between mb-2`}
         >
           <View style={tw`flex-row  items-center`}>
-            <Icon name="chevron-down-outline" type="ionicon" size={32} />
-            <Text style={tw`text-lg font-medium`}>Hallway</Text>
+            <Icon name="chevron-down-outline" type="ionicon" size={30} />
+            <Text style={tw`text-base font-medium`}>Hallway</Text>
           </View>
           <View style={tw`flex-row  items-center`}>
             <TouchableOpacity>
-              <Icon name="document-outline" type="ionicon" size={26} />
+              <Icon name="document-outline" type="ionicon" size={24} />
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -186,7 +201,7 @@ const index = () => {
                 source={{
                   uri: user?.photoURL,
                 }}
-                style={[tw`rounded-full ml-8`, { height: 40, width: 40 }]}
+                style={[tw`rounded-xl ml-6`, { height: 30, width: 30 }]}
               />
             </TouchableOpacity>
           </View>
@@ -213,16 +228,34 @@ const index = () => {
               </TouchableOpacity>
             </View>
             <View style={tw`flex flex-row`}>
-              <TouchableOpacity style={tw`pr-4`}>
+              <TouchableOpacity style={tw`pr-4`} onPress={handlePress}>
                 <Icon
-                  size={20}
+                  size={22}
                   name="ellipsis-h"
                   type="font-awesome"
-                  color="#3f3f3f"
+                  color="#989898"
                 />
               </TouchableOpacity>
               <TouchableOpacity>
-                <Icon size={18} name="lock" type="font-awesome" />
+                <Tooltip
+                  popover={
+                    <Text>
+                      Club Rooms are for club members only, unless opened to
+                      everyone on Clubhouse
+                    </Text>
+                  }
+                  height={80}
+                  width={220}
+                  withOverlay={false}
+                  backgroundColor="#989898"
+                >
+                  <Icon
+                    size={22}
+                    name="lock"
+                    type="font-awesome"
+                    color="#989898"
+                  />
+                </Tooltip>
               </TouchableOpacity>
             </View>
           </View>
@@ -306,6 +339,15 @@ const index = () => {
             </View>
           </View>
         </View>
+        <ActionSheet
+          ref={actionSheet}
+          options={optionArray}
+          cancelButtonIndex={4}
+          // destructiveButtonIndex={0}
+          onPress={(index) => {
+            /* do something */
+          }}
+        />
       </View>
     </SafeAreaView>
   );

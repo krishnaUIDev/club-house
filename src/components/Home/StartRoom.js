@@ -54,7 +54,7 @@ const StartRoom = ({ theme }) => {
             name="paper-plane-o"
             type="font-awesome"
             color="#000"
-            onPress={() => navigation.navigate("MessageScreen")}
+            onPress={() => navigation.navigate("chatStack")}
           />
         </TouchableOpacity>
       </View>

@@ -23,6 +23,7 @@ import { auth, db } from "../../firebase";
 const Signup = () => {
   const navigation = useNavigation();
   const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [profile, setProfile] = useState(null);
@@ -64,14 +65,16 @@ const Signup = () => {
       .createUserWithEmailAndPassword(email, pass)
       .then((result) => {
         result.user.updateProfile({ displayName: name });
-        db.collection("users").doc(auth?.currentUser?.uid).set({
-          displayName: name,
-          createdAt: new Date(),
-          email: email,
-          photoURL: profile,
-          uid: auth?.currentUser?.uid,
-          accountId: "123",
-        });
+        db.collection("users")
+          .doc(auth?.currentUser?.uid)
+          .set({
+            displayName: name,
+            createdAt: new Date(),
+            email: email,
+            photoURL: profile,
+            uid: auth?.currentUser?.uid,
+            accountId: "@" + userName,
+          });
         navigation.navigate("LoginScreen");
       })
       .catch((error) => {
@@ -89,102 +92,110 @@ const Signup = () => {
       >
         <Icon name="arrow-back-outline" type="ionicon" color="#fff" />
       </TouchableOpacity>
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          flex: 1,
-          justifyContent: "center",
-          alignContent: "center",
-        }}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
       >
-        <KeyboardAvoidingView enabled>
-          <View style={tw`p-12 mt-24`}>
-            <View style={tw`items-center h-1/4 mt-4`}>
-              <TouchableOpacity onPress={handleAddProfilePic}>
-                <View>
-                  {!profile ? (
-                    <Avatar
-                      size={200}
-                      rounded
-                      icon={{
-                        name: "camera-sharp",
-                        type: "ionicon",
-                        size: 42,
-                      }}
-                      style={[tw`h-32 w-32 bg-red-500`, { borderRadius: 200 }]}
-                    />
-                  ) : (
-                    <Avatar
-                      rounded
-                      size={200}
-                      source={{
-                        uri: profile,
-                      }}
-                      style={[tw`h-32 w-32`]}
-                    />
-                  )}
-                </View>
-              </TouchableOpacity>
+        <View style={tw`p-12 mt-24`}>
+          <View style={tw`items-center h-1/4 mt-4`}>
+            <TouchableOpacity onPress={handleAddProfilePic}>
+              <View>
+                {!profile ? (
+                  <Avatar
+                    size={200}
+                    rounded
+                    icon={{
+                      name: "camera-sharp",
+                      type: "ionicon",
+                      size: 42,
+                    }}
+                    style={[tw`h-32 w-32 bg-red-500`, { borderRadius: 200 }]}
+                  />
+                ) : (
+                  <Avatar
+                    rounded
+                    size={200}
+                    source={{
+                      uri: profile,
+                    }}
+                    style={[tw`h-32 w-32`]}
+                  />
+                )}
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={tw`h-3/4`}>
+            <View style={styles.SectionStyle}>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Full Name"
+                onChangeText={(name) => setName(name)}
+                returnKeyType="next"
+                autoCapitalize="none"
+                keyboardType="default"
+              />
             </View>
-            <View style={tw`h-3/4`}>
-              <View style={styles.SectionStyle}>
-                <TextInput
-                  style={styles.inputStyle}
-                  placeholder="First Name"
-                  onChangeText={(name) => setName(name)}
-                  returnKeyType="next"
-                  autoCapitalize="none"
-                  keyboardType="default"
-                />
-              </View>
-              <View style={styles.SectionStyle}>
-                <TextInput
-                  style={styles.inputStyle}
-                  placeholder="Email"
-                  onChangeText={(name) => setEmail(name)}
-                  returnKeyType="next"
-                  autoCapitalize="none"
-                  keyboardType="email-address"
-                />
-              </View>
-              <View style={styles.SectionStyle}>
-                <TextInput
-                  style={styles.inputStyle}
-                  placeholder="Password"
-                  onChangeText={(name) => setPass(name)}
-                  secureTextEntry={true}
-                />
-              </View>
-              <View style={tw`items-center`}>
-                <Button
-                  title="Signup"
-                  color="white"
-                  buttonStyle={{
-                    backgroundColor: "#57534E",
-                    width: 260,
-                    borderRadius: 20,
-                  }}
-                  onPress={onSignUp}
-                />
-                <Text style={tw`text-base p-2 font-extralight text-opacity-30`}>
-                  {/* OR */}
-                </Text>
-                <Text
-                  style={tw`text-lg font-semibold text-blue-500`}
-                  onPress={() => navigation.navigate("forgotPass")}
-                >
-                  Forgot Password
-                </Text>
-                <Text
-                  style={tw`text-xs p-4 font-normal  text-center text-opacity-30`}
-                >
-                  By creating an account you agree with our Terms of Use
-                </Text>
-              </View>
+            <View style={styles.SectionStyle}>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="User Name"
+                onChangeText={(name) => setUserName(name)}
+                returnKeyType="next"
+                autoCapitalize="none"
+                keyboardType="default"
+              />
+            </View>
+            <View style={styles.SectionStyle}>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Email"
+                onChangeText={(name) => setEmail(name)}
+                returnKeyType="next"
+                autoCapitalize="none"
+                keyboardType="email-address"
+              />
+            </View>
+            <View style={styles.SectionStyle}>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder="Password"
+                onChangeText={(name) => setPass(name)}
+                secureTextEntry={true}
+              />
+            </View>
+            <View style={tw`items-center`}>
+              <Button
+                title="Signup"
+                color="white"
+                disabled={
+                  email === null ||
+                  name === null ||
+                  userName === null ||
+                  pass === null ||
+                  profile === null
+                }
+                buttonStyle={{
+                  backgroundColor: "#57534E",
+                  width: 260,
+                  borderRadius: 20,
+                }}
+                onPress={onSignUp}
+              />
+              <Text
+                style={tw`text-lg font-semibold text-blue-500 mt-4`}
+                onPress={() => navigation.navigate("forgotPass")}
+              >
+                Forgot Password
+              </Text>
+              <Text
+                style={tw`text-xs p-4 font-normal  text-center text-opacity-30`}
+              >
+                By creating an account you agree with our Terms of Use
+              </Text>
             </View>
           </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </View>
+      </KeyboardAvoidingView>
       <Container />
     </SafeAreaView>
   );

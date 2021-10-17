@@ -1,33 +1,56 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Alert, Linking } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import tw from "tailwind-react-native-classnames";
 import ButtonComponent from "../Reuse/ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
 
-export default function UserBarCodeScan() {
+export default function UserBarCodeScan({
+  route: {
+    params: { user },
+  },
+}) {
   const navigation = useNavigation();
 
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
-    (async () => {
+    const getPermissionSetup = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
-    })();
+    };
+    getPermissionSetup();
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`found user: ${data}`);
+    if (data) {
+      navigation.replace("userInfo", { user });
+    }
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+  if (hasPermission === false || hasPermission === "denied") {
+    Alert.alert(
+      "Camera is disabled",
+      `Enale the camera in the Settings App under "Privacy" > "Camera" > "Clubhouse"`,
+      [
+        {
+          text: "Open Settings",
+          onPress: () => Linking.openSettings(),
+        },
+        {
+          text: "Cancel",
+          onPress: () => console.log("OK Pressed"),
+          style: "cancel",
+        },
+      ],
+      { cancelable: true }
+    );
+    return null;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return null;
   }
 
   return (
@@ -35,7 +58,7 @@ export default function UserBarCodeScan() {
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
-        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+        // barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
       />
       {scanned && (
         <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
@@ -44,7 +67,7 @@ export default function UserBarCodeScan() {
         <ButtonComponent
           buttonColor="#5576ab"
           label="My Code"
-          onChange={() => navigation.navigate("qr")}
+          onChange={() => navigation.navigate("qr", { user })}
         />
       </View>
     </View>
