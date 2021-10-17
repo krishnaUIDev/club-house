@@ -22,6 +22,7 @@ import ChatRoomScreen from "./src/components/Messages/ChatRoomScreen";
 import NewMessage from "./src/components/Messages/NewMessage";
 
 import UpdateUser from "./src/components/Profile/UpdateUser";
+import UserDp from "./src/components/Profile/UserDp";
 import ChangeUser from "./src/components/Profile/ChangeUser";
 import UserInfo from "./src/components/Profile/UserInfo";
 

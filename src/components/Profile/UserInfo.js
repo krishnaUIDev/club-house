@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
+  Modal,
 } from "react-native";
 import { Icon, Button } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
@@ -13,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import AuthHook from "../customHook/AuthHook";
 import ActionSheet from "react-native-actionsheet";
 import { db } from "../../firebase";
+import UserDp from "./UserDp";
 
 const UserInfo = ({
   route: {
@@ -22,6 +24,7 @@ const UserInfo = ({
   const navigation = useNavigation();
   const mainUser = AuthHook();
   const [follow, setFollow] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   let actionSheet = React.useRef();
   var optionArray = ["Share Profile", "Block", "Report an incident", "Cancel"];
@@ -59,6 +62,8 @@ const UserInfo = ({
       .catch((err) => {});
   };
 
+  const viewImage = () => setModalVisible(true);
+
   return (
     <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
       <View style={tw`flex flex-row justify-end px-6 pt-4 items-center`}>
@@ -84,7 +89,7 @@ const UserInfo = ({
       <View style={[tw`flex h-full px-6 py-4`]}>
         <View style={tw`flex`}>
           <View style={tw`flex-row justify-between`}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={viewImage}>
               <Image
                 source={{
                   uri: user?.photoURL,
@@ -184,6 +189,21 @@ const UserInfo = ({
           /* do something */
         }}
       />
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        closeOnClick={true}
+        onBackdropPress={() => setModalVisible(false)}
+        onRequestClose={() => setModalVisible(!modalVisible)}
+      >
+        <TouchableOpacity
+          style={tw`flex-1`}
+          onPress={() => setModalVisible(false)}
+        >
+          <UserDp photoURL={user?.photoURL} />
+        </TouchableOpacity>
+      </Modal>
     </SafeAreaView>
   );
 };
