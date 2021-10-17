@@ -31,7 +31,7 @@ const QR = ({
         <Text style={tw`text-base font-light`}>{user?.accountId}</Text>
         <View style={tw`bg-white shadow-md p-4 mt-2 rounded-lg`}>
           <QRCode
-            value={user?.accountId}
+            value={user?.uid}
             color={"#000000"}
             backgroundColor={"white"}
             size={150}
@@ -50,7 +50,7 @@ const QR = ({
         <ButtonComponent
           buttonColor="#5576ab"
           label="Scan"
-          onChange={() => navigation.navigate("UserBarCodeScan", {user})}
+          onChange={() => navigation.navigate("UserBarCodeScan", { user })}
         />
       </View>
     </View>

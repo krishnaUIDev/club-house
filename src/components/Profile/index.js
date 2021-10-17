@@ -12,6 +12,8 @@ import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
 import Dialog from "react-native-dialog";
 import AuthHook from "../customHook/AuthHook";
+import { showMessage, hideMessage } from "react-native-flash-message";
+import { db } from "../../firebase";
 
 const AlertBox = ({ visible, setVisible }) => {
   return (
@@ -35,12 +37,35 @@ const AlertBox = ({ visible, setVisible }) => {
 const index = () => {
   const navigation = useNavigation();
   const [user, setUser] = useState(null);
+  const [followingData, setFollowingData] = useState([]);
+  const [following, setFollowing] = useState(0);
   const userInfo = AuthHook();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (userInfo) setUser(userInfo);
   }, [userInfo]);
+
+  useEffect(() => {
+    const getFollowers = async () => {
+      await db
+        .collection("follow")
+        .doc(user?.uid)
+        .get()
+        .then((snap) => {
+          const data = snap.data();
+          if (data && data?.uid) {
+            setFollowing(data?.uid.length);
+            setFollowingData(data?.uid);
+          } else {
+            setFollowing(0);
+            setFollowingData([]);
+          }
+        })
+        .catch((err) => {});
+    };
+    getFollowers();
+  }, [db]);
 
   const createAlert = () =>
     Alert.alert(
@@ -63,6 +88,20 @@ const index = () => {
       ],
       { cancelable: false }
     );
+
+  const navigateFollowing = () => {
+    if (following) {
+      navigation.navigate("following", { followingData });
+    } else {
+      showMessage({
+        message: "You dont have any following",
+        type: "danger",
+        icon: "danger",
+        style: { height: 100 },
+        titleStyle: { fontSize: 16 },
+      });
+    }
+  };
 
   return (
     <SafeAreaView style={{ backgroundColor: "#f2f0e4" }}>
@@ -116,8 +155,10 @@ const index = () => {
             <TouchableOpacity onPress={() => navigation.navigate("followers")}>
               <Text style={tw`pr-6 text-base font-semibold`}>23 followers</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("following")}>
-              <Text style={tw`text-base font-semibold`}>23 following</Text>
+            <TouchableOpacity onPress={navigateFollowing}>
+              <Text style={tw`text-base font-semibold`}>
+                {following} following
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

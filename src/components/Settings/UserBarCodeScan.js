@@ -4,6 +4,7 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import tw from "tailwind-react-native-classnames";
 import ButtonComponent from "../Reuse/ButtonComponent";
 import { useNavigation } from "@react-navigation/native";
+import { db } from "../../firebase";
 
 export default function UserBarCodeScan({
   route: {
@@ -26,7 +27,50 @@ export default function UserBarCodeScan({
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     if (data) {
-      navigation.replace("userInfo", { user });
+      db.collection("users")
+        .doc(data)
+        .get()
+        .then((docRef) => {
+          const searchUser = docRef?.data();
+          if (searchUser?.uid === user?.uid) {
+            Alert.alert(
+              "Its your profile",
+              "",
+              [
+                {
+                  text: "View",
+                  onPress: () => navigation.navigate("Profile"),
+                },
+                {
+                  text: "Cancel",
+                  onPress: () => console.log("OK Pressed"),
+                  style: "cancel",
+                },
+              ],
+              { cancelable: true }
+            );
+          } else if (searchUser) {
+            navigation.replace("userInfo", { user: searchUser });
+          } else {
+            Alert.alert(
+              "User not Found",
+              `Please get the valid QR Code`,
+              [
+                {
+                  text: "Back",
+                  onPress: () => navigation.navigate("qr", { user }),
+                },
+                {
+                  text: "Cancel",
+                  onPress: () => console.log("OK Pressed"),
+                  style: "cancel",
+                },
+              ],
+              { cancelable: true }
+            );
+          }
+        })
+        .catch((err) => {});
     }
   };
 
@@ -58,7 +102,6 @@ export default function UserBarCodeScan({
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
-        // barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
       />
       {scanned && (
         <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
