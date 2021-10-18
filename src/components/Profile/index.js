@@ -47,13 +47,12 @@ const index = () => {
   }, [userInfo]);
 
   useEffect(() => {
-    const getFollowers = async () => {
-      await db
-        .collection("follow")
-        .doc(user?.uid)
+    const getFollowers = () => {
+      db.collection("follow")
+        .doc(userInfo?.uid)
         .get()
         .then((snap) => {
-          const data = snap.data();
+          const data = snap?.data();
           if (data && data?.uid) {
             setFollowing(data?.uid.length);
             setFollowingData(data?.uid);
@@ -65,7 +64,7 @@ const index = () => {
         .catch((err) => {});
     };
     getFollowers();
-  }, [db]);
+  }, [userInfo]);
 
   const createAlert = () =>
     Alert.alert(

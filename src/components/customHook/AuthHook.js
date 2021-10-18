@@ -23,7 +23,7 @@ function AuthHook() {
   };
   useEffect(() => {
     getUser();
-  }, [auth]);
+  }, [auth, db]);
 
   return user;
 }

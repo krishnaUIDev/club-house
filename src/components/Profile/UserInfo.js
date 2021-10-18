@@ -86,7 +86,7 @@ const UserInfo = ({
           />
         </TouchableOpacity>
       </View>
-      <View style={[tw`flex h-full px-6 py-4`]}>
+      <View style={[tw`flex h-full px-6 py-4 relative`]}>
         <View style={tw`flex`}>
           <View style={tw`flex-row justify-between`}>
             <TouchableOpacity onPress={viewImage}>
@@ -204,6 +204,25 @@ const UserInfo = ({
           <UserDp photoURL={user?.photoURL} />
         </TouchableOpacity>
       </Modal>
+      <View style={tw`absolute inset-x-0 bottom-0 h-32 items-center`}>
+        <Button
+          title="Message"
+          titleStyle={{ paddingLeft: 6, color: "black" }}
+          buttonStyle={{ backgroundColor: "#d1d5db" }}
+          containerStyle={{ borderRadius: 25, width: "85%" }}
+          style={tw`bg-gray-300`}
+          icon={
+            <View>
+              <Icon
+                size={18}
+                name="paper-plane-o"
+                type="font-awesome"
+                color="black"
+              />
+            </View>
+          }
+        />
+      </View>
     </SafeAreaView>
   );
 };
